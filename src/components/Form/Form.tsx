@@ -3,9 +3,10 @@ import { useHistory } from 'react-router';
 import { useForm } from 'src/hooks/useForm';
 import { useAuth } from 'src/hooks/useAuth';
 import { emialRegex } from 'src/utils/constants';
-import * as S from './styles';
 import { useTicTacToe } from 'src/hooks/useTicTacToe';
 import { TicTacToeActionType } from 'src/store/TicTacToe/TicTacToe.types';
+import Loader from '../Loader/Loader';
+import * as S from './styles';
 
 const Form = () => {
     const history = useHistory();
@@ -82,50 +83,52 @@ const Form = () => {
     );
 
     return (
-        <S.FormContainer onSubmit={submitHandler}>
-            <S.FormBox>
-                <S.Title>{loginFormType ? 'login' : 'register'}</S.Title>
+        <S.FormBox onSubmit={submitHandler}>
+            <S.Title>{loginFormType ? 'login' : 'register'}</S.Title>
+            <S.InputBox>
+                <S.Input
+                    onBlur={isTouchedEmailHanlder}
+                    onChange={emailHandler}
+                    value={email}
+                    type="email"
+                />
+                <S.Label>E-mail</S.Label>
+                {emailErrorInfo}
+            </S.InputBox>
+            <S.InputBox>
+                <S.Input
+                    onBlur={isTouchedPasswordHanlder}
+                    onChange={passwordHandler}
+                    value={password}
+                    type="password"
+                />
+                <S.Label>Password</S.Label>
+                {passwordErrorInfo}
+            </S.InputBox>
+            {!loginFormType && (
                 <S.InputBox>
                     <S.Input
-                        onBlur={isTouchedEmailHanlder}
-                        onChange={emailHandler}
-                        value={email}
-                        type="email"
-                    />
-                    <S.Label>E-mail</S.Label>
-                    {emailErrorInfo}
-                </S.InputBox>
-                <S.InputBox>
-                    <S.Input
-                        onBlur={isTouchedPasswordHanlder}
-                        onChange={passwordHandler}
-                        value={password}
+                        onBlur={isTouchedConfirmPasswordHanlder}
+                        onChange={confirmPasswordHandler}
+                        value={confirmPassword}
                         type="password"
                     />
-                    <S.Label>Password</S.Label>
-                    {passwordErrorInfo}
+                    <S.Label>Confirm Password</S.Label>
+                    {confirmPasswordErrorInfo}
                 </S.InputBox>
-                {!loginFormType && (
-                    <S.InputBox>
-                        <S.Input
-                            onBlur={isTouchedConfirmPasswordHanlder}
-                            onChange={confirmPasswordHandler}
-                            value={confirmPassword}
-                            type="password"
-                        />
-                        <S.Label>Confirm Password</S.Label>
-                        {confirmPasswordErrorInfo}
-                    </S.InputBox>
-                )}
-                {error.length > 0 && <S.Error block>{error}</S.Error>}
+            )}
+            {error.length > 0 && <S.Error block>{error}</S.Error>}
+            {loading ? (
+                <Loader />
+            ) : (
                 <S.ButtonBox registerType={!loginFormType}>
                     <S.Button type="submit">{loginFormType ? 'login' : 'register'}</S.Button>
                     <S.Link onClick={formTypeHandler} role="button">
                         {loginFormType ? 'Create an account' : 'Login to an existing account'}
                     </S.Link>
                 </S.ButtonBox>
-            </S.FormBox>
-        </S.FormContainer>
+            )}
+        </S.FormBox>
     );
 };
 

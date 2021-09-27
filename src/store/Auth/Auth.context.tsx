@@ -2,14 +2,12 @@ import React from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
     createUserWithEmailAndPassword,
-    getAuth,
     signInWithEmailAndPassword,
     signOut,
     User,
 } from '@firebase/auth';
 import { auth } from 'src/firebase';
 import { ProviderValue } from './Auth.types';
-import { useTicTacToe } from 'src/hooks/useTicTacToe';
 
 export const AuthContext = createContext({} as ProviderValue);
 
