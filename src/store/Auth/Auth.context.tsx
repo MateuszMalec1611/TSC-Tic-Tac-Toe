@@ -1,6 +1,12 @@
 import React from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, User } from '@firebase/auth';
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    User,
+} from '@firebase/auth';
 import { auth } from 'src/firebase';
 import { ProviderValue } from './Auth.types';
 import { useTicTacToe } from 'src/hooks/useTicTacToe';
@@ -22,9 +28,19 @@ const AuthProvider: React.FC = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password);
     };
 
+    const login = (email: string, password: string) => {
+        return signInWithEmailAndPassword(auth, email, password);
+    };
+
+    const logout = () => {
+        return signOut(auth);
+    };
+
     const value = {
         currentUser,
         signup,
+        login,
+        logout,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,16 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import { useForm } from 'src/hooks/useForm';
 import { useAuth } from 'src/hooks/useAuth';
 import { emialRegex } from 'src/utils/constants';
 import * as S from './styles';
 import { useTicTacToe } from 'src/hooks/useTicTacToe';
-import { TicTacToeContext } from 'src/store/TicTacToe/TicTacToe.context';
 import { TicTacToeActionType } from 'src/store/TicTacToe/TicTacToe.types';
 
 const Form = () => {
+    const history = useHistory();
     const [loginFormType, setLoginFormType] = useState(true);
     const [error, setError] = useState('');
-    const { signup } = useAuth();
+    const { signup, login } = useAuth();
     const {
         ticTacToeState: { loading },
         ticTacToeDispatch,
@@ -48,8 +49,9 @@ const Form = () => {
             setError('');
             ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: true });
 
-            if (loginFormType) return;
+            if (loginFormType) await login(email, password);
             if (!loginFormType) await signup(email, password);
+            history.push('/menu');
         } catch (err) {
             setError(loginFormType ? 'Failed to login' : 'Failed to create an account');
         } finally {
@@ -72,8 +74,12 @@ const Form = () => {
     };
 
     const emailErrorInfo = emailError && <S.Error>Please enter a valid Email!</S.Error>;
-    const passwordErrorInfo = passwordError && <S.Error>Password incorrect (at least 6 characters)</S.Error>;
-    const confirmPasswordErrorInfo = confirmPasswordError && <S.Error>Passwords do not match</S.Error>;
+    const passwordErrorInfo = passwordError && (
+        <S.Error>Password incorrect (at least 6 characters)</S.Error>
+    );
+    const confirmPasswordErrorInfo = confirmPasswordError && (
+        <S.Error>Passwords do not match</S.Error>
+    );
 
     return (
         <S.FormContainer onSubmit={submitHandler}>
