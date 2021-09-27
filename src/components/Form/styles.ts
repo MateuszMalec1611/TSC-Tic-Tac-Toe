@@ -84,6 +84,7 @@ export const Error = styled.a`
     position: absolute;
     bottom: -80%;
     width: 100%;
+    font-size: 14px;
     color: ${({ theme }) => theme.colors.redColor};
 `;
 export const ButtonBox = styled.div<ButtonBoxProps>`

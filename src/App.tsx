@@ -1,13 +1,16 @@
 import Form from './components/Form/Form';
+import { AuthProvider } from './store/Auth/Auth.context';
 import { Container, Wrapper } from './styles';
 
 const App = () => {
     return (
-        <Container>
-            <Wrapper>
-                <Form />
-            </Wrapper>
-        </Container>
+        <AuthProvider>
+            <Container>
+                <Wrapper>
+                    <Form />
+                </Wrapper>
+            </Container>
+        </AuthProvider>
     );
 };
 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'src/hooks/useForm';
+import { useAuth } from 'src/hooks/useAuth';
 import { emialRegex } from 'src/utils/constants';
 import * as S from './styles';
 
 const Form = () => {
     const [loginFormType, setLoginFormType] = useState(true);
+    const { signup } = useAuth();
 
     const {
         value: email,
@@ -19,7 +21,7 @@ const Form = () => {
         isTouchedHanlder: isTouchedPasswordHanlder,
         isValid: isValidPassword,
         error: passwordError,
-    } = useForm(value => value.trim().length > 0);
+    } = useForm(value => value.trim().length >= 6);
     const {
         value: confirmPassword,
         valueHandler: confirmPasswordHandler,
@@ -33,7 +35,20 @@ const Form = () => {
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         if (!checkInputs()) return;
-        console.log(`success`);
+
+        if (loginFormType) {
+            return;
+        } else {
+            signUpHandler();
+        }
+    };
+
+    const signUpHandler = async () => {
+        try {
+            await signup(email, password);
+        } catch (err) {
+            alert(err);
+        }
     };
 
     const checkInputs = () => {
@@ -51,7 +66,7 @@ const Form = () => {
     };
 
     const emailErrorInfo = emailError && <S.Error>Please enter a valid Email!</S.Error>;
-    const passwordErrorInfo = passwordError && <S.Error>Password incorrect</S.Error>;
+    const passwordErrorInfo = passwordError && <S.Error>Password incorrect (at least 6 characters)</S.Error>;
     const confirmPasswordErrorInfo = confirmPasswordError && <S.Error>Passwords do not match</S.Error>;
 
     return (
