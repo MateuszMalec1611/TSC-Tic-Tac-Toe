@@ -1,47 +1,97 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'src/hooks/useForm';
+import { emialRegex } from 'src/utils/constants';
 import * as S from './styles';
 
 const Form = () => {
     const [loginFormType, setLoginFormType] = useState(true);
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 
-    const loginHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
-        setLogin(target.value);
-
-    const passwordHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
-        setPassword(target.value);
-
-    const confirmPasswordHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
-        setConfirmPassword(target.value);
+    const {
+        value: email,
+        valueHandler: emailHandler,
+        isTouchedHanlder: isTouchedEmailHanlder,
+        isValid: isValidEmail,
+        error: emailError,
+    } = useForm(value => emialRegex.test(value));
+    const {
+        value: password,
+        valueHandler: passwordHandler,
+        isTouchedHanlder: isTouchedPasswordHanlder,
+        isValid: isValidPassword,
+        error: passwordError,
+    } = useForm(value => value.trim().length > 0);
+    const {
+        value: confirmPassword,
+        valueHandler: confirmPasswordHandler,
+        isTouchedHanlder: isTouchedConfirmPasswordHanlder,
+        isValid: isValidConfirmPassword,
+        error: confirmPasswordError,
+    } = useForm(value => value === password);
 
     const formTypeHandler = () => setLoginFormType(prev => !prev);
 
+    const submitHandler = (event: React.FormEvent) => {
+        event.preventDefault();
+        if (!checkInputs()) return;
+        console.log(`success`);
+    };
+
+    const checkInputs = () => {
+        isTouchedEmailHanlder();
+        isTouchedPasswordHanlder();
+
+        if (!loginFormType) {
+            isTouchedConfirmPasswordHanlder();
+            if (isValidEmail && isValidPassword && isValidConfirmPassword) return true;
+        } else if (isValidEmail && isValidPassword) {
+            return true;
+        }
+
+        return false;
+    };
+
+    const emailErrorInfo = emailError && <S.Error>Please enter a valid Email!</S.Error>;
+    const passwordErrorInfo = passwordError && <S.Error>Password incorrect</S.Error>;
+    const confirmPasswordErrorInfo = confirmPasswordError && <S.Error>Passwords do not match</S.Error>;
+
     return (
-        <S.FormContainer>
+        <S.FormContainer onSubmit={submitHandler}>
             <S.FormBox>
                 <S.Title>{loginFormType ? 'login' : 'register'}</S.Title>
                 <S.InputBox>
-                    <S.Input onChange={loginHandler} value={login} type="text" />
+                    <S.Input
+                        onBlur={isTouchedEmailHanlder}
+                        onChange={emailHandler}
+                        value={email}
+                        type="email"
+                    />
                     <S.Label>E-mail</S.Label>
+                    {emailErrorInfo}
                 </S.InputBox>
                 <S.InputBox>
-                    <S.Input onChange={passwordHandler} value={password} type="password" />
+                    <S.Input
+                        onBlur={isTouchedPasswordHanlder}
+                        onChange={passwordHandler}
+                        value={password}
+                        type="password"
+                    />
                     <S.Label>Password</S.Label>
+                    {passwordErrorInfo}
                 </S.InputBox>
                 {!loginFormType && (
                     <S.InputBox>
                         <S.Input
+                            onBlur={isTouchedConfirmPasswordHanlder}
                             onChange={confirmPasswordHandler}
                             value={confirmPassword}
                             type="password"
                         />
                         <S.Label>Confirm Password</S.Label>
+                        {confirmPasswordErrorInfo}
                     </S.InputBox>
                 )}
                 <S.ButtonBox registerType={!loginFormType}>
-                    <S.Button>{loginFormType ? 'login' : 'register'}</S.Button>
+                    <S.Button type="submit">{loginFormType ? 'login' : 'register'}</S.Button>
                     <S.Link onClick={formTypeHandler} role="button">
                         {loginFormType ? 'Create an account' : 'Login to an existing account'}
                     </S.Link>

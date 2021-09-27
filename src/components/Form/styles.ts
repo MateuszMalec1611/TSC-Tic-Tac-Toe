@@ -35,12 +35,12 @@ export const FormBox = styled.form`
 `;
 export const InputBox = styled.div`
     position: relative;
-    margin: 16px 0;
+    margin: 22px 0;
     display: flex;
     flex-direction: column;
 
     @media ${device.tabletBreakpoint} {
-        margin: 18px 0;
+        margin: 24px 0;
     }
 `;
 export const Label = styled.label`
@@ -79,6 +79,12 @@ export const Input = styled.input`
     @media ${device.tabletBreakpoint} {
         font-size: 20px;
     }
+`;
+export const Error = styled.a`
+    position: absolute;
+    bottom: -80%;
+    width: 100%;
+    color: ${({ theme }) => theme.colors.redColor};
 `;
 export const ButtonBox = styled.div<ButtonBoxProps>`
     margin-top: 20px;
