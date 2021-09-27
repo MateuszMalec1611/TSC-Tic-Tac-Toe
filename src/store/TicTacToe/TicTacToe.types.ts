@@ -1,4 +1,7 @@
-export type ProviderValue = {};
+export type ProviderValue = {
+    ticTacToeState: TicTacToeState;
+    ticTacToeDispatch: (action: TicTacToeActions) => void;
+};
 
 export interface TicTacToeState {
     loading: boolean;

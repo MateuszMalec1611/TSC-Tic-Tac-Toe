@@ -4,12 +4,18 @@ import { ThemeProvider } from 'styled-components';
 import theme from './config/theme';
 import './index.css';
 import App from './App';
+import AuthProvider from './store/Auth/Auth.context';
+import TicTacToeProvider from './store/TicTacToe/TicTacToe.context';
 
 ReactDOM.render(
     <React.StrictMode>
-        <ThemeProvider theme={theme}>
-            <App />
-        </ThemeProvider>
+        <TicTacToeProvider>
+            <AuthProvider>
+                <ThemeProvider theme={theme}>
+                    <App />
+                </ThemeProvider>
+            </AuthProvider>
+        </TicTacToeProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'src/hooks/useForm';
 import { useAuth } from 'src/hooks/useAuth';
 import { emialRegex } from 'src/utils/constants';
 import * as S from './styles';
+import { useTicTacToe } from 'src/hooks/useTicTacToe';
+import { TicTacToeContext } from 'src/store/TicTacToe/TicTacToe.context';
+import { TicTacToeActionType } from 'src/store/TicTacToe/TicTacToe.types';
 
 const Form = () => {
     const [loginFormType, setLoginFormType] = useState(true);
+    const [error, setError] = useState('');
     const { signup } = useAuth();
+    const {
+        ticTacToeState: { loading },
+        ticTacToeDispatch,
+    } = useTicTacToe();
 
     const {
         value: email,
@@ -32,22 +40,20 @@ const Form = () => {
 
     const formTypeHandler = () => setLoginFormType(prev => !prev);
 
-    const submitHandler = (event: React.FormEvent) => {
+    const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault();
         if (!checkInputs()) return;
 
-        if (loginFormType) {
-            return;
-        } else {
-            signUpHandler();
-        }
-    };
-
-    const signUpHandler = async () => {
         try {
-            await signup(email, password);
+            setError('');
+            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: true });
+
+            if (loginFormType) return;
+            if (!loginFormType) await signup(email, password);
         } catch (err) {
-            alert(err);
+            setError(loginFormType ? 'Failed to login' : 'Failed to create an account');
+        } finally {
+            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: false });
         }
     };
 
@@ -105,6 +111,7 @@ const Form = () => {
                         {confirmPasswordErrorInfo}
                     </S.InputBox>
                 )}
+                {error.length > 0 && <S.Error block>{error}</S.Error>}
                 <S.ButtonBox registerType={!loginFormType}>
                     <S.Button type="submit">{loginFormType ? 'login' : 'register'}</S.Button>
                     <S.Link onClick={formTypeHandler} role="button">

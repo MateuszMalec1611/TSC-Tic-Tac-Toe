@@ -4,6 +4,9 @@ import { device } from 'src/utils/constants';
 interface ButtonBoxProps {
     registerType: boolean;
 }
+interface ErrorProps {
+    block?: boolean;
+}
 
 export const FormContainer = styled.div`
     padding: 20px;
@@ -80,11 +83,13 @@ export const Input = styled.input`
         font-size: 20px;
     }
 `;
-export const Error = styled.a`
-    position: absolute;
-    bottom: -80%;
+export const Error = styled.a<ErrorProps>`
+    margin-top: ${({ block }) => (block ? '18px' : 'unset')};
+    position: ${({ block }) => (block ? 'relative' : 'absolute')};
+    bottom: ${({ block }) => (block ? 'unset' : '-80%')};
+    text-align: center;
     width: 100%;
-    font-size: 14px;
+    font-size: ${({ block }) => (block ? '18px' : '14px')};
     color: ${({ theme }) => theme.colors.redColor};
 `;
 export const ButtonBox = styled.div<ButtonBoxProps>`

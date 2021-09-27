@@ -3,10 +3,11 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, User } from '@firebase/auth';
 import { auth } from 'src/firebase';
 import { ProviderValue } from './Auth.types';
+import { useTicTacToe } from 'src/hooks/useTicTacToe';
 
 export const AuthContext = createContext({} as ProviderValue);
 
-export const AuthProvider: React.FC = ({ children }) => {
+const AuthProvider: React.FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<User | null>();
 
     useEffect(() => {
@@ -28,3 +29,5 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+export default AuthProvider;
