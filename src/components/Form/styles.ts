@@ -30,18 +30,18 @@ export const InputBox = styled.div`
 export const Label = styled.label`
     position: absolute;
     bottom: 2px;
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSizes.XL};
     z-index: 0;
     transition: bottom 0.3s, font-size 0.3s;
 
     @media ${device.tabletBreakpoint} {
-        font-size: 22px;
+        font-size: ${({ theme }) => theme.fontSizes.XXL};
     }
 `;
 export const Input = styled.input`
     padding: 2px 5px;
     background-color: transparent;
-    font-size: 18px;
+    font-size: ${({ theme }) => theme.fontSizes.M};
     color: ${({ theme }) => theme.colors.fontColor};
     border: none;
     border-bottom: 1px solid white;
@@ -51,17 +51,17 @@ export const Input = styled.input`
     &[value]:not([value='']) + label,
     &:focus + label {
         bottom: 26px;
-        font-size: 16px;
+        font-size: ${({ theme }) => theme.fontSizes.S};
         color: ${({ theme }) => theme.colors.transparentGrayColor};
 
         @media ${device.tabletBreakpoint} {
             bottom: 28px;
-            font-size: 18px;
+            ${({ theme }) => theme.fontSizes.M};
         }
     }
 
     @media ${device.tabletBreakpoint} {
-        font-size: 20px;
+        font-size: ${({ theme }) => theme.fontSizes.XL};
     }
 `;
 export const Error = styled.p<ErrorProps>`
@@ -70,7 +70,7 @@ export const Error = styled.p<ErrorProps>`
     bottom: ${({ block }) => (block ? 'unset' : '-80%')};
     text-align: center;
     width: 100%;
-    font-size: ${({ block }) => (block ? '18px' : '14px')};
+    font-size: ${({ block, theme }) => (block ? theme.fontSizes.M : theme.fontSizes.XS)};
     color: ${({ theme }) => theme.colors.redColor};
 `;
 export const ButtonBox = styled.div<ButtonBoxProps>`
@@ -84,7 +84,7 @@ export const Button = styled.button`
     margin-right: 12px;
     padding: 6px 15px;
     height: max-content;
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.fontSizes.XS};
     background-color: ${({ theme }) => theme.colors.whiteColor};
     color: ${({ theme }) => theme.colors.transparentBlackColor};
     border: 1px solid transparent;
@@ -101,26 +101,26 @@ export const Button = styled.button`
 
     @media ${device.tabletBreakpoint} {
         padding: 7px 16px;
-        font-size: 16px;
+        font-size: ${({ theme }) => theme.fontSizes.S};
     }
 `;
 export const Text = styled.a`
     padding: 5px 10px;
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.fontSizes.S};
 
     @media ${device.tabletBreakpoint} {
-        font-size: 18px;
+        font-size: ${({ theme }) => theme.fontSizes.M};
     }
 `;
 
 export const StyledLink = styled(Link)`
     padding: 5px 10px;
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.fontSizes.S};
     text-decoration: none;
     color: ${({ theme }) => theme.colors.fontColor};
 
     @media ${device.tabletBreakpoint} {
-        font-size: 18px;
+        font-size: ${({ theme }) => theme.fontSizes.M};
     }
 `;
 

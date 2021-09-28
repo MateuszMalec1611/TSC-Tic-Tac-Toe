@@ -11,6 +11,16 @@ const theme: DefaultTheme = {
         transparentBlackColor: '#000000c2',
         transparentGrayColor: 'rgb(255 255 255 / 75%)',
     },
+    fontSizes: {
+        XS: '14px',
+        S: '16px',
+        M: '18px',
+        L: '26px',
+        XL: '20px',
+        XXL: '22px',
+        XXXL: '26px',
+        XXXXL: '36px',
+    },
 };
 
 export default theme;
