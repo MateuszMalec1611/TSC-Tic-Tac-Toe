@@ -1,11 +1,17 @@
 import React, { createContext, useReducer } from 'react';
-import { ProviderValue, TicTacToeActions, TicTacToeActionType, TicTacToeState } from './TicTacToe.types';
+import {
+    ProviderValue,
+    TicTacToeActions,
+    TicTacToeActionType,
+    TicTacToeState,
+} from './TicTacToe.types';
 
 export const TicTacToeContext = createContext({} as ProviderValue);
 
 const initialState: TicTacToeState = {
     loading: false,
     error: false,
+    errorMessage: '',
 };
 
 const reducer = (state: TicTacToeState, action: TicTacToeActions) => {
@@ -14,7 +20,12 @@ const reducer = (state: TicTacToeState, action: TicTacToeActions) => {
             return {
                 ...state,
                 loading: action.payload,
-                error: false,
+            };
+        case TicTacToeActionType.ERROR:
+            return {
+                ...state,
+                error: action.payload.error,
+                errorMessage: action.payload.errorMessage,
             };
 
         default:

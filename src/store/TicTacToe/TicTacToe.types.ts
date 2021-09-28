@@ -6,6 +6,7 @@ export type ProviderValue = {
 export interface TicTacToeState {
     loading: boolean;
     error: boolean;
+    errorMessage: string;
 }
 
 export type Loading = {
@@ -15,12 +16,12 @@ export type Loading = {
 
 export type Error = {
     type: TicTacToeActionType.ERROR;
-    payload: boolean;
+    payload: { error: boolean; errorMessage: string };
 };
 
 export type TicTacToeActions = Error | Loading;
 
 export enum TicTacToeActionType {
-    LOADING,
-    ERROR,
+    LOADING = 'LOADING',
+    ERROR = 'ERROR',
 }

@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
 import { useForm } from 'src/hooks/useForm';
-import { useAuth } from 'src/hooks/useAuth';
 import { emialRegex } from 'src/utils/constants';
 import { useTicTacToe } from 'src/hooks/useTicTacToe';
-import { TicTacToeActionType } from 'src/store/TicTacToe/TicTacToe.types';
+import useAuthAction from 'src/hooks/useAuthAction';
+import { AuthActions } from 'src/store/Auth/Auth.types';
 import Loader from '../Loader/Loader';
 import * as S from './styles';
 
 const Form = () => {
-    const history = useHistory();
     const [loginFormType, setLoginFormType] = useState(true);
-    const [error, setError] = useState('');
-    const { signup, login } = useAuth();
     const {
-        ticTacToeState: { loading },
-        ticTacToeDispatch,
+        ticTacToeState: { loading, error, errorMessage },
     } = useTicTacToe();
+    const useAction = useAuthAction();
 
     const {
         value: email,
@@ -44,20 +40,12 @@ const Form = () => {
 
     const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault();
-        if (!checkInputs()) return;
+        checkInputs();
 
-        try {
-            setError('');
-            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: true });
-
-            if (loginFormType) await login(email, password);
-            if (!loginFormType) await signup(email, password);
-            history.push('/menu');
-        } catch (err) {
-            setError(loginFormType ? 'Failed to login' : 'Failed to create an account');
-        } finally {
-            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: false });
-        }
+        if (loginFormType)
+            await useAction(AuthActions.LOGIN, '/menu', 'Failed to login', email, password);
+        if (!loginFormType)
+            await useAction(AuthActions.LOGOUT, '/menu', 'Failed to create an account', email, password);
     };
 
     const checkInputs = () => {
@@ -117,7 +105,7 @@ const Form = () => {
                     {confirmPasswordErrorInfo}
                 </S.InputBox>
             )}
-            {error.length > 0 && <S.Error block>{error}</S.Error>}
+            {error && <S.Error block>{errorMessage}</S.Error>}
             {loading ? (
                 <Loader />
             ) : (

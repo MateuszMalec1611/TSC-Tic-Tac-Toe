@@ -1,28 +1,12 @@
-import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from 'src/hooks/useAuth';
-import { useTicTacToe } from 'src/hooks/useTicTacToe';
-import { TicTacToeActionType } from 'src/store/TicTacToe/TicTacToe.types';
+import useAuthAction from 'src/hooks/useAuthAction';
+import { AuthActions } from 'src/store/Auth/Auth.types';
 
 const Menu = () => {
-    const history = useHistory();
-    const [error, setError] = useState('');
-    const { logout } = useAuth();
-    const { ticTacToeDispatch } = useTicTacToe();
+    const useAction = useAuthAction();
 
-    const logoutHandling = async () => {
-        try {
-            setError('');
-            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: true });
-
-            await logout();
-            history.push('/');
-        } catch (err) {
-            setError('Failed to logout');
-        } finally {
-            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: false });
-        }
-    };
+    const logoutHandling = async () =>
+        await useAction(AuthActions.LOGOUT, '/', 'Failed to logout!');
 
     return (
         <>

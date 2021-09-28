@@ -1,10 +1,11 @@
+import Card from 'src/components/Card/Card';
 import Form from 'src/components/Form/Form';
 import * as S from './styles';
 
 const Auth = () => (
-    <S.FormContainer>
+    <Card>
         <Form />
-    </S.FormContainer>
+    </Card>
 );
 
 export default Auth;

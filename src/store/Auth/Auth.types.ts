@@ -4,3 +4,10 @@ export type ProviderValue = {
     login: (email: string, password: string) => any;
     logout: () => any;
 };
+
+export enum AuthActions {
+    LOGIN = 'LOGIN',
+    SIGNUP = 'SIGNUP',
+    LOGOUT = 'LOGOUT',
+    PW_RECOVER = 'PW_RECOVER',
+}
