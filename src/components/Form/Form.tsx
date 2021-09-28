@@ -5,9 +5,8 @@ import { useTicTacToe } from 'src/hooks/useTicTacToe';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
 import Loader from '../Loader/Loader';
+import Title from '../Title/Title';
 import * as S from './styles';
-import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 
 const Form = () => {
     const [loginFormType, setLoginFormType] = useState(true);
@@ -80,7 +79,7 @@ const Form = () => {
 
     return (
         <S.FormBox onSubmit={submitHandler}>
-            <S.Title>{loginFormType ? 'login' : 'register'}</S.Title>
+            <Title>{loginFormType ? 'login' : 'register'}</Title>
             <S.InputBox>
                 <S.Input
                     onBlur={isTouchedEmailHanlder}

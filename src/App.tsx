@@ -14,8 +14,11 @@ const App = () => {
                 <Router>
                     <Switch>
                         <Route exact path="/">
-                            {currentUser ? <Menu /> : <Redirect to="/auth" />}
+                            <Menu />
                         </Route>
+                        {/* <Route exact path="/">
+                            {currentUser ? <Menu /> : <Redirect to="/auth" />}
+                        </Route> */}
                         <Route path="/auth" component={Auth} />
                         <Route path="/forgot-password" component={ResetPassword} />
                     </Switch>

@@ -6,8 +6,9 @@ import Loader from 'src/components/Loader/Loader';
 import { Card } from 'src/components/Card/styles';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
-import * as S from 'src/components/Form/styles';
+import Title from 'src/components/Title/Title';
 import { Message } from './styles';
+import * as S from 'src/components/Form/styles';
 
 const ResetPassword = () => {
     const {
@@ -40,7 +41,7 @@ const ResetPassword = () => {
     return (
         <Card>
             <S.FormBox onSubmit={submitHandler}>
-                <S.Title>password reset</S.Title>
+                <Title>password reset</Title>
                 <S.InputBox>
                     <S.Input
                         onBlur={isTouchedEmailHanlder}
