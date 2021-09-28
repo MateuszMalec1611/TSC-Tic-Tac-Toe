@@ -11,18 +11,6 @@ interface ErrorProps {
 interface LinkBoxProps {
     loginFormType: boolean;
 }
-
-export const Title = styled.h2`
-    margin: 20px 0;
-    font-size: 26px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-
-    @media ${device.tabletBreakpoint} {
-        font-size: 36px;
-    }
-`;
 export const FormBox = styled.form`
     display: flex;
     flex-direction: column;
