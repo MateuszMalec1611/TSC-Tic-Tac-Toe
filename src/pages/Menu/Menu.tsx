@@ -6,7 +6,7 @@ const Menu = () => {
     const useAction = useAuthAction();
 
     const logoutHandling = async () =>
-        await useAction(AuthActions.LOGOUT, '/', 'Failed to logout!');
+        await useAction(AuthActions.LOGOUT, 'Failed to logout!', '/auth');
 
     return (
         <>

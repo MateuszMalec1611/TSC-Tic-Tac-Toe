@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { device } from 'src/utils/constants';
 
 interface ButtonBoxProps {
@@ -6,6 +7,9 @@ interface ButtonBoxProps {
 }
 interface ErrorProps {
     block?: boolean;
+}
+interface LinkBoxProps {
+    loginFormType: boolean;
 }
 
 export const Title = styled.h2`
@@ -72,7 +76,7 @@ export const Input = styled.input`
         font-size: 20px;
     }
 `;
-export const Error = styled.a<ErrorProps>`
+export const Error = styled.p<ErrorProps>`
     margin-top: ${({ block }) => (block ? '18px' : 'unset')};
     position: ${({ block }) => (block ? 'relative' : 'absolute')};
     bottom: ${({ block }) => (block ? 'unset' : '-80%')};
@@ -112,11 +116,27 @@ export const Button = styled.button`
         font-size: 16px;
     }
 `;
-export const Link = styled.a`
-    padding: 10px;
+export const Text = styled.a`
+    padding: 5px 10px;
     font-size: 16px;
 
     @media ${device.tabletBreakpoint} {
         font-size: 18px;
     }
+`;
+
+export const StyledLink = styled(Link)`
+    padding: 5px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.fontColor};
+
+    @media ${device.tabletBreakpoint} {
+        font-size: 18px;
+    }
+`;
+
+export const LinkBox = styled.div<LinkBoxProps>`
+    display: ${({ loginFormType }) => (loginFormType ? 'flex' : 'block')};
+    flex-direction: ${({ loginFormType }) => (loginFormType ? 'column' : 'unset')};
 `;

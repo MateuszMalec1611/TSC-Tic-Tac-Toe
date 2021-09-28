@@ -2,6 +2,7 @@ import React from 'react';
 import { createContext, useEffect, useState } from 'react';
 import {
     createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signOut,
     User,
@@ -34,11 +35,14 @@ const AuthProvider: React.FC = ({ children }) => {
         return signOut(auth);
     };
 
+    const resetPassword = (emial: string) => sendPasswordResetEmail(auth, emial);
+
     const value = {
         currentUser,
         signup,
         login,
         logout,
+        resetPassword,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

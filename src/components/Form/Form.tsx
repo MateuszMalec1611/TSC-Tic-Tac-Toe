@@ -6,6 +6,8 @@ import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
 import Loader from '../Loader/Loader';
 import * as S from './styles';
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Form = () => {
     const [loginFormType, setLoginFormType] = useState(true);
@@ -40,12 +42,18 @@ const Form = () => {
 
     const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault();
-        checkInputs();
+        if (!checkInputs()) return;
 
         if (loginFormType)
-            await useAction(AuthActions.LOGIN, '/menu', 'Failed to login', email, password);
+            await useAction(AuthActions.LOGIN, 'Failed to login', '/', email, password);
         if (!loginFormType)
-            await useAction(AuthActions.LOGOUT, '/menu', 'Failed to create an account', email, password);
+            await useAction(
+                AuthActions.LOGOUT,
+                'Failed to create an account',
+                '/',
+                email,
+                password
+            );
     };
 
     const checkInputs = () => {
@@ -111,9 +119,14 @@ const Form = () => {
             ) : (
                 <S.ButtonBox registerType={!loginFormType}>
                     <S.Button type="submit">{loginFormType ? 'login' : 'register'}</S.Button>
-                    <S.Link onClick={formTypeHandler} role="button">
-                        {loginFormType ? 'Create an account' : 'Login to an existing account'}
-                    </S.Link>
+                    <S.LinkBox loginFormType={loginFormType}>
+                        <S.Text onClick={formTypeHandler} role="button">
+                            {loginFormType ? 'Create an account' : 'Login to an existing account'}
+                        </S.Text>
+                        {loginFormType && (
+                            <S.StyledLink to="/forgot-password">Forgot Password?</S.StyledLink>
+                        )}
+                    </S.LinkBox>
                 </S.ButtonBox>
             )}
         </S.FormBox>

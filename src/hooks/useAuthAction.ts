@@ -6,13 +6,13 @@ import { useTicTacToe } from './useTicTacToe';
 
 const useAuthAction = () => {
     const { ticTacToeDispatch } = useTicTacToe();
-    const { login, signup, logout } = useAuth();
+    const { login, signup, logout, resetPassword } = useAuth();
     const history = useHistory();
 
     const useAction = async (
         action: AuthActions,
-        path: string,
         errorMess: string,
+        path?: string,
         email?: string,
         password?: string
     ) => {
@@ -29,14 +29,15 @@ const useAuthAction = () => {
                 case AuthActions.LOGOUT:
                     await logout();
                     break;
-                case AuthActions.PW_RECOVER:
+                case AuthActions.RESET_PASSWORD:
+                    await resetPassword(email!);
                     break;
             }
             ticTacToeDispatch({
                 type: TicTacToeActionType.ERROR,
                 payload: { error: false, errorMessage: '' },
             });
-            history.push(`${path}`);
+            if (path) history.push(`${path}`);
         } catch (err) {
             ticTacToeDispatch({
                 type: TicTacToeActionType.ERROR,
