@@ -1,21 +1,17 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { device } from 'src/utils/constants';
 
 interface ButtonBoxProps {
     registerType: boolean;
 }
+interface ErrorProps {
+    block?: boolean;
+}
+interface LinkBoxProps {
+    loginFormType: boolean;
+}
 
-export const FormContainer = styled.div`
-    padding: 20px;
-    margin-top: 80px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-width: 600px;
-    background-color: ${({ theme }) => theme.colors.lightGrayColor};
-    border-radius: 4px;
-    box-shadow: 3px 3px 14px black;
-`;
 export const Title = styled.h2`
     margin: 20px 0;
     font-size: 26px;
@@ -80,10 +76,13 @@ export const Input = styled.input`
         font-size: 20px;
     }
 `;
-export const Error = styled.a`
-    position: absolute;
-    bottom: -80%;
+export const Error = styled.p<ErrorProps>`
+    margin-top: ${({ block }) => (block ? '18px' : 'unset')};
+    position: ${({ block }) => (block ? 'relative' : 'absolute')};
+    bottom: ${({ block }) => (block ? 'unset' : '-80%')};
+    text-align: center;
     width: 100%;
+    font-size: ${({ block }) => (block ? '18px' : '14px')};
     color: ${({ theme }) => theme.colors.redColor};
 `;
 export const ButtonBox = styled.div<ButtonBoxProps>`
@@ -117,11 +116,27 @@ export const Button = styled.button`
         font-size: 16px;
     }
 `;
-export const Link = styled.a`
-    padding: 10px;
+export const Text = styled.a`
+    padding: 5px 10px;
     font-size: 16px;
 
     @media ${device.tabletBreakpoint} {
         font-size: 18px;
     }
+`;
+
+export const StyledLink = styled(Link)`
+    padding: 5px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.fontColor};
+
+    @media ${device.tabletBreakpoint} {
+        font-size: 18px;
+    }
+`;
+
+export const LinkBox = styled.div<LinkBoxProps>`
+    display: ${({ loginFormType }) => (loginFormType ? 'flex' : 'block')};
+    flex-direction: ${({ loginFormType }) => (loginFormType ? 'column' : 'unset')};
 `;
