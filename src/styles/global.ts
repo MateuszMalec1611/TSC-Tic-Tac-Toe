@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 export const StyledLink = styled(Link)`
     padding: 8px 15px;
-    margin-top: 18px;
-    width: 100%;
     background-color: ${({ theme }) => theme.colors.whiteColor};
     box-shadow: 2px 2px 10px ${({ theme }) => theme.colors.blackColor};
     border: 1px solid transparent;

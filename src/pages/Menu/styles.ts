@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { StyledLink } from 'src/styles/global';
 
 export const MenuBox = styled.div``;
 export const ButtonsBox = styled.div`
@@ -7,6 +7,10 @@ export const ButtonsBox = styled.div`
     flex-direction: column;
     align-items: center;
     width: 160px;
+`;
+export const StyledLinkBtn = styled(StyledLink)`
+    margin-top: 18px;
+    width: 100%;
 `;
 
 export const Button = styled.button`

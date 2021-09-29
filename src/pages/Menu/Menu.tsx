@@ -17,9 +17,9 @@ const Menu = () => {
                 <S.MenuBox>
                     <Title>Menu</Title>
                     <S.ButtonsBox>
-                        <StyledLink to="/ticTacToe">1 vs 1</StyledLink>
-                        <StyledLink to="/">vs ai</StyledLink>
-                        <StyledLink to="/">ranking</StyledLink>
+                        <S.StyledLinkBtn to="/ticTacToe">1 vs 1</S.StyledLinkBtn>
+                        <S.StyledLinkBtn to="/">vs ai</S.StyledLinkBtn>
+                        <S.StyledLinkBtn to="/">ranking</S.StyledLinkBtn>
                         <S.Button onClick={logoutHandling}>Logout</S.Button>
                     </S.ButtonsBox>
                 </S.MenuBox>
