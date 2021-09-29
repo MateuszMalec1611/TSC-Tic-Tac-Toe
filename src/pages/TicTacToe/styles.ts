@@ -1,6 +1,7 @@
-import styled from 'styled-components';
-import { StyledLink } from 'src/styles/global';
+import { Link } from 'react-router-dom';
+import { btnStyles } from 'src/components/Button/styles';
 import { device } from 'src/utils/constants';
+import styled from 'styled-components';
 
 interface Xor0Props {
     Xor0: string;
@@ -41,7 +42,8 @@ export const O = styled.h3<Xor0Props>`
 export const X = styled(O)<Xor0Props>`
     color: ${({ Xor0, theme }) => (Xor0 === 'X' ? 'red' : theme.colors.transparentGrayColor)};
 `;
-export const ReturnBtn = styled(StyledLink)`
+export const ReturnBtn = styled(Link)`
+    ${btnStyles}
     position: absolute;
     bottom: -60px;
     left: 50%;

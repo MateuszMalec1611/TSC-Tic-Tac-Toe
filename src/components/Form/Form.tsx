@@ -6,6 +6,8 @@ import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
 import Loader from '../Loader/Loader';
 import Title from '../Title/Title';
+import Button from '../Button/Button';
+import { ButtonTypes } from 'src/types/buttonTypes';
 import * as S from './styles';
 
 const Form = () => {
@@ -117,7 +119,13 @@ const Form = () => {
                 <Loader />
             ) : (
                 <S.ButtonBox registerType={!loginFormType}>
-                    <S.Button type="submit">{loginFormType ? 'login' : 'register'}</S.Button>
+                    <Button
+                        margin="0"
+                        type="submit"
+                        typeOf={ButtonTypes.BUTTON}
+                        width="max-content">
+                        {loginFormType ? 'login' : 'register'}
+                    </Button>
                     <S.LinkBox loginFormType={loginFormType}>
                         <S.Text onClick={formTypeHandler} role="button">
                             {loginFormType ? 'Create an account' : 'Login to an existing account'}

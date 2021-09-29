@@ -1,8 +1,9 @@
+import Button from 'src/components/Button/Button';
 import Card from 'src/components/Card/Card';
 import Title from 'src/components/Title/Title';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
-import { StyledLink } from 'src/styles/global';
+import { ButtonTypes } from 'src/types/buttonTypes';
 import * as S from './styles';
 
 const Menu = () => {
@@ -17,11 +18,23 @@ const Menu = () => {
                 <S.MenuBox>
                     <Title>Menu</Title>
                     <S.ButtonsBox>
-                        <S.StyledLinkBtn to="/ticTacToe?name=1vs1">1 vs 1</S.StyledLinkBtn>
-                        <S.StyledLinkBtn to="/ticTacToe?name=vsAI">
+                        <Button
+                            margin="26px 0 0 0"
+                            width="100%"
+                            typeOf={ButtonTypes.LINK}
+                            path="/ticTacToe?name=1vs1">
+                            1 vs 1
+                        </Button>
+                        <Button
+                            margin="26px 0 0 0"
+                            width="100%"
+                            typeOf={ButtonTypes.LINK}
+                            path="/ticTacToe?name=vsAI">
                             vs ai
-                        </S.StyledLinkBtn>
-                        <S.StyledLinkBtn to="/">ranking</S.StyledLinkBtn>
+                        </Button>
+                        <Button margin="26px 0 0 0" width="100%" typeOf={ButtonTypes.LINK} path="/">
+                            ranking
+                        </Button>
                         <S.Button onClick={logoutHandling}>Logout</S.Button>
                     </S.ButtonsBox>
                 </S.MenuBox>

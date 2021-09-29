@@ -8,6 +8,8 @@ import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
 import Title from 'src/components/Title/Title';
 import { Message } from './styles';
+import Button from 'src/components/Button/Button';
+import { ButtonTypes } from 'src/types/buttonTypes';
 import * as S from 'src/components/Form/styles';
 
 const ResetPassword = () => {
@@ -59,7 +61,13 @@ const ResetPassword = () => {
                     <Loader />
                 ) : (
                     <S.ButtonBox registerType={false}>
-                        <S.Button type="submit">reset</S.Button>
+                        <Button
+                            margin="0"
+                            type="submit"
+                            typeOf={ButtonTypes.BUTTON}
+                            width="max-content">
+                            reset
+                        </Button>
                         <S.StyledLink to="/auth">Back to login</S.StyledLink>
                     </S.ButtonBox>
                 )}
