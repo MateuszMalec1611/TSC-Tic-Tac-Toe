@@ -17,8 +17,10 @@ const Menu = () => {
                 <S.MenuBox>
                     <Title>Menu</Title>
                     <S.ButtonsBox>
-                        <S.StyledLinkBtn to="/ticTacToe">1 vs 1</S.StyledLinkBtn>
-                        <S.StyledLinkBtn to="/">vs ai</S.StyledLinkBtn>
+                        <S.StyledLinkBtn to="/ticTacToe?name=1vs1">1 vs 1</S.StyledLinkBtn>
+                        <S.StyledLinkBtn to="/ticTacToe?name=vsAI">
+                            vs ai
+                        </S.StyledLinkBtn>
                         <S.StyledLinkBtn to="/">ranking</S.StyledLinkBtn>
                         <S.Button onClick={logoutHandling}>Logout</S.Button>
                     </S.ButtonsBox>
