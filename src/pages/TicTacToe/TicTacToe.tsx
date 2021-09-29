@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Board from 'src/components/Board/Board';
-import { calculateWinner } from 'src/utils/helper';
+import { calculateWinner } from 'src/utils/helpers';
 import * as S from './styles';
 
 const TicTacToe = () => {
