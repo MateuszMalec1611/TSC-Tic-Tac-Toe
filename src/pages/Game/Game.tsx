@@ -11,9 +11,9 @@ const Game = () => {
     const x0 = xIsNext ? 'X' : 'O';
 
     const clickHandler = (index: number) => {
-        const cellsCopy = [...cells!];
+        if (winner || cells![index] || !xIsNext) return;
 
-        if (winner || cells![index]) return;
+        const cellsCopy = [...cells!];
 
         cellsCopy[index] = x0;
         handleMove(cellsCopy);
@@ -43,12 +43,16 @@ const Game = () => {
         setMovesLeft(prevState => prevState - 1);
     };
 
-    useEffect(() => aiMove(), [movesLeft]);
+    useEffect(() => {
+        const aiMoveTimeout = setTimeout(() => aiMove(), 500);
+
+        return () => clearTimeout(aiMoveTimeout);
+    }, [movesLeft]);
 
     const gameInfo = (
         <>
             {!!movesLeft && !winner && <S.InfoText>next move</S.InfoText>}
-            {winner && <S.InfoText>win</S.InfoText>}
+            {winner && <S.InfoText>won</S.InfoText>}
             {!movesLeft && !winner && <S.InfoText>draw</S.InfoText>}
         </>
     );
