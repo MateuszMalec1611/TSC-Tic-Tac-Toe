@@ -21,6 +21,7 @@ declare module 'styled-components' {
             XXL: string;
             XXXL: string;
             XXXXL: string;
+            ExtraLarge: string;
         };
     }
 }
