@@ -20,6 +20,7 @@ const theme: DefaultTheme = {
         XXL: '22px',
         XXXL: '26px',
         XXXXL: '36px',
+        ExtraLarge: '60px'
     },
 };
 

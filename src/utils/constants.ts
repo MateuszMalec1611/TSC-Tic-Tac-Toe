@@ -1,10 +1,12 @@
 const size = {
+    mobileBreakpoint: '374px',
     tabletBreakpoint: '768px',
     desktopBreakpoint: '1100px',
     largeDesktopBreakpoint: '1366px',
 };
 
 export const device = {
+    mobileBreakpoint: `(min-width: ${size.mobileBreakpoint})`,
     tabletBreakpoint: `(min-width: ${size.tabletBreakpoint})`,
     desktopBreakpoint: `(min-width: ${size.desktopBreakpoint})`,
     largeDesktopBreakpoint: `(min-width: ${size.largeDesktopBreakpoint})`,

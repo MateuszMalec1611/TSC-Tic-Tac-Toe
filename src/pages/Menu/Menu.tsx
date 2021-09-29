@@ -2,6 +2,7 @@ import Card from 'src/components/Card/Card';
 import Title from 'src/components/Title/Title';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
+import { StyledLink } from 'src/styles/global';
 import * as S from './styles';
 
 const Menu = () => {
@@ -12,14 +13,13 @@ const Menu = () => {
 
     return (
         <>
-            {/* <Link to="/">Login or register</Link> */}
             <Card>
                 <S.MenuBox>
                     <Title>Menu</Title>
                     <S.ButtonsBox>
-                        <S.StyledLink to="/">1 vs 1</S.StyledLink>
-                        <S.StyledLink to="/">vs ai</S.StyledLink>
-                        <S.StyledLink to="/">ranking</S.StyledLink>
+                        <S.StyledLinkBtn to="/ticTacToe">1 vs 1</S.StyledLinkBtn>
+                        <S.StyledLinkBtn to="/">vs ai</S.StyledLinkBtn>
+                        <S.StyledLinkBtn to="/">ranking</S.StyledLinkBtn>
                         <S.Button onClick={logoutHandling}>Logout</S.Button>
                     </S.ButtonsBox>
                 </S.MenuBox>
