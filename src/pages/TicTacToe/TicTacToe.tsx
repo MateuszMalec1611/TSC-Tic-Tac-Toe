@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'src/hooks/useQueryParams';
-import Board from 'src/components/Board/Board';
 import { calculateWinner } from 'src/utils/helpers';
-import * as S from './styles';
 import { GameMode } from 'src/types/gameModes';
+import Board from 'src/components/Board/Board';
+import * as S from './styles';
 
 const TicTacToe = () => {
     const [cells, setCells] = useState<string[]>(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
     const [movesLeft, setMovesLeft] = useState(9);
     const query = useQuery();
+
     const winner = calculateWinner(cells);
     const x0 = xIsNext ? 'X' : 'O';
     const gameMode = query.get('name');
@@ -20,28 +21,27 @@ const TicTacToe = () => {
         const cellsCopy = [...cells!];
 
         cellsCopy[index] = x0;
-        handleMove(cellsCopy);
+        moveHandler(cellsCopy);
     };
 
     const aiMove = () => {
         if (!xIsNext && !winner && movesLeft !== 0) {
             const cellsCopy = [...cells!];
-            let randomNumber: number;
             let shuffleUnique = true;
 
             while (shuffleUnique) {
-                randomNumber = Math.floor(Math.random() * 9);
+                let randomNumber = Math.floor(Math.random() * 9);
 
                 if (!cells![randomNumber]) {
                     shuffleUnique = false;
                     cellsCopy[randomNumber] = x0;
                 }
             }
-            handleMove(cellsCopy);
+            moveHandler(cellsCopy);
         }
     };
 
-    const handleMove = (cellsCopy: string[]) => {
+    const moveHandler = (cellsCopy: string[]) => {
         setCells([...cellsCopy]);
         setXIsNext(!xIsNext);
         setMovesLeft(prevState => prevState - 1);
