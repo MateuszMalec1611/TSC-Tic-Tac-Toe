@@ -6,9 +6,10 @@ interface CellProps {
     onClick: () => void;
 }
 
-const Cell: React.FC<CellProps> = ({ value, onClick }) => {
-
-    return <S.Cell value={value} onClick={onClick}>{value}</S.Cell>;
-};
+const Cell: React.FC<CellProps> = ({ value, onClick }) => (
+    <S.Cell value={value} onClick={onClick}>
+        {value}
+    </S.Cell>
+);
 
 export default Cell;
