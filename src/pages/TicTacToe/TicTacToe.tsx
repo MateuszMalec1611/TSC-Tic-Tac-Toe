@@ -15,12 +15,7 @@ const TicTacToe = () => {
     const gameMode = query.get('name');
 
     const clickHandler = (index: number) => {
-        if (gameMode === GameMode.vsAi) {
-            if (winner || cells![index] || !xIsNext) return;
-        }
-        if (gameMode !== GameMode.vsAi) {
-            if (winner || cells![index]) return;
-        }
+        if (winner || cells![index] || (!xIsNext && gameMode === GameMode.vsAi)) return;
 
         const cellsCopy = [...cells!];
 
