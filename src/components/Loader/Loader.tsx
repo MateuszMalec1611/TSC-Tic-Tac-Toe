@@ -1,4 +1,4 @@
-import { Load, LoadWrapper } from './style';
+import { Load, LoadWrapper } from './styles';
 
 interface LoaderProps {
     center?: boolean;

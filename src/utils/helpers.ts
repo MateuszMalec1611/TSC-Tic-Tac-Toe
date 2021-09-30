@@ -1,3 +1,5 @@
+import { GameMode } from 'src/types/gameModes';
+
 export const calculateWinner = (cells: any) => {
     const lines = [
         [0, 1, 2],
@@ -17,3 +19,20 @@ export const calculateWinner = (cells: any) => {
     }
     return null;
 };
+
+export const clickHandler = (
+    index: number,
+    winner: any,
+    cells: string[],
+    gameMode: string,
+    xIsNext: boolean,
+    x0: string
+) => {
+    if (winner || cells![index] || (!xIsNext && gameMode === GameMode.vsAi)) return;
+
+    const cellsCopy = [...cells!];
+
+    cellsCopy[index] = x0;
+    return cellsCopy;
+};
+

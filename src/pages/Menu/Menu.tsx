@@ -22,14 +22,14 @@ const Menu = () => {
                             margin="26px 0 0 0"
                             width="100%"
                             typeOf={ButtonTypes.LINK}
-                            path="/ticTacToe?name=1vs1">
+                            path="/ticTacToe/1vs1?name=1vs1">
                             1 vs 1
                         </Button>
                         <Button
                             margin="26px 0 0 0"
                             width="100%"
                             typeOf={ButtonTypes.LINK}
-                            path="/ticTacToe?name=vsAI">
+                            path="/ticTacToe/vsAI?name=vsAI">
                             vs ai
                         </Button>
                         <Button margin="26px 0 0 0" width="100%" typeOf={ButtonTypes.LINK} path="/">

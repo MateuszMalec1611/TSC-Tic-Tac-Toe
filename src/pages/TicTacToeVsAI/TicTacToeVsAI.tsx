@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'src/hooks/useQueryParams';
 import { calculateWinner } from 'src/utils/helpers';
-import { GameMode } from 'src/types/gameModes';
-import Board from 'src/components/Board/Board';
-import Button from 'src/components/Button/Button';
-import { ButtonTypes } from 'src/types/buttonTypes';
+import { clickHandler } from 'src/utils/helpers';
 import * as S from './styles';
+import TicTacToe from 'src/components/TicTacToe/TicTacToe';
 
-const TicTacToe = () => {
+const TicTacToeVsAI = () => {
     const [cells, setCells] = useState<string[]>(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
     const [movesLeft, setMovesLeft] = useState(9);
@@ -17,13 +15,9 @@ const TicTacToe = () => {
     const x0 = xIsNext ? 'X' : 'O';
     const gameMode = query.get('name');
 
-    const clickHandler = (index: number) => {
-        if (winner || cells![index] || (!xIsNext && gameMode === GameMode.vsAi)) return;
-
-        const cellsCopy = [...cells!];
-
-        cellsCopy[index] = x0;
-        moveHandler(cellsCopy);
+    const click = (index: number) => {
+        const cellsCopy = clickHandler(index, winner, cells, gameMode!, xIsNext, x0);
+        if (!!cellsCopy) moveHandler(cellsCopy!);
     };
 
     const aiMove = () => {
@@ -55,17 +49,15 @@ const TicTacToe = () => {
         setMovesLeft(9);
     };
 
-    if (gameMode === GameMode.vsAi) {
-        useEffect(() => {
-            const aiMoveTimeout = setTimeout(() => aiMove(), 500);
+    useEffect(() => {
+        const aiMoveTimeout = setTimeout(() => aiMove(), 500);
 
-            return () => clearTimeout(aiMoveTimeout);
-        }, [movesLeft]);
-    }
+        return () => clearTimeout(aiMoveTimeout);
+    }, [movesLeft]);
 
     const gameInfo = (
         <>
-            {!!movesLeft && !winner && <S.InfoText>next move</S.InfoText>}
+            {!!movesLeft && !winner && <S.InfoText>next move ai</S.InfoText>}
             {winner && <S.InfoText>won</S.InfoText>}
             {!movesLeft && !winner && <S.InfoText>draw</S.InfoText>}
         </>
@@ -78,23 +70,9 @@ const TicTacToe = () => {
                 {gameInfo}
                 <S.O Xor0={!!winner ? winner : x0}>0</S.O>
             </S.Info>
-            <S.BoardBox>
-                <Board cells={cells!} onClick={clickHandler}></Board>
-                <S.ButtonsBox>
-                    <Button margin="0 10px 0 0" width="190px" typeOf={ButtonTypes.LINK} path="/">
-                        back to menu
-                    </Button>
-                    <Button
-                        onClick={resetGameHandler}
-                        margin="0 0 0 10px"
-                        width="max-content"
-                        typeOf={ButtonTypes.BUTTON}>
-                        restart
-                    </Button>
-                </S.ButtonsBox>
-            </S.BoardBox>
+            <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
         </S.Container>
     );
 };
 
-export default TicTacToe;
+export default TicTacToeVsAI;

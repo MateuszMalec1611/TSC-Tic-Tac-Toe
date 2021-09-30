@@ -5,7 +5,8 @@ import { useAuth } from './hooks/useAuth';
 const Auth = React.lazy(() => import('src/pages/Auth/Auth'));
 const ResetPassword = React.lazy(() => import('src/pages/ResetPassword/ResetPassword'));
 const Menu = React.lazy(() => import('src/pages/Menu/Menu'));
-const TicTacToe = React.lazy(() => import('src/pages/TicTacToe/TicTacToe'));
+const TicTacToe1vs1 = React.lazy(() => import('src/pages/TicTacToe1vs1/TicTacToe1vs1'));
+const TicTacToeVsAI = React.lazy(() => import('src/pages/TicTacToeVsAI/TicTacToeVsAI'));
 import { Container, Wrapper } from './styles';
 
 const App = () => {
@@ -22,8 +23,11 @@ const App = () => {
                             </Route>
                             <Route path="/auth" component={Auth} />
                             <Route path="/forgot-password" component={ResetPassword} />
-                            <Route path="/ticTacToe">
-                                {currentUser ? <TicTacToe /> : <Redirect to="/auth" />}
+                            <Route path="/ticTacToe/1vs1">
+                                {currentUser ? <TicTacToe1vs1 /> : <Redirect to="/auth" />}
+                            </Route>
+                            <Route path="/ticTacToe/vsAI">
+                                {currentUser ? <TicTacToeVsAI /> : <Redirect to="/auth" />}
                             </Route>
                         </Suspense>
                     </Switch>
