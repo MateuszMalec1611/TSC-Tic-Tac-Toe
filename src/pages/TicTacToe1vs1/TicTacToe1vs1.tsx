@@ -4,6 +4,7 @@ import { calculateWinner } from 'src/utils/helpers';
 import { clickHandler } from 'src/utils/helpers';
 import TicTacToe from 'src/components/TicTacToe/TicTacToe';
 import * as S from './styles';
+import Modal from 'src/components/Modal/Modal';
 
 const TicTacToe1vs1 = () => {
     const [cells, setCells] = useState<string[]>(Array(9).fill(null));
@@ -32,22 +33,17 @@ const TicTacToe1vs1 = () => {
         setMovesLeft(9);
     };
 
-    const gameInfo = (
-        <>
-            {!!movesLeft && !winner && <S.InfoText>next move</S.InfoText>}
-            {winner && <S.InfoText>won</S.InfoText>}
-            {!movesLeft && !winner && <S.InfoText>draw</S.InfoText>}
-        </>
-    );
-
     return (
         <S.Container>
             <S.Info>
                 <S.X Xor0={!!winner ? winner : x0}>X</S.X>
-                {/* {gameInfo} */}
+                {!!movesLeft && !winner && <S.InfoText>next move</S.InfoText>}
                 <S.O Xor0={!!winner ? winner : x0}>0</S.O>
             </S.Info>
             <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
+            {(!!winner || !movesLeft) && (
+                <Modal winner={winner} closeModal={resetGameHandler} />
+            )}
         </S.Container>
     );
 };

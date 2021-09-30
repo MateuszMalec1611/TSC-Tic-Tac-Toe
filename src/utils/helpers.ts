@@ -1,6 +1,6 @@
 import { GameMode } from 'src/types/gameModes';
 
-export const calculateWinner = (cells: any) => {
+export const calculateWinner = (cells: string[]) => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -35,4 +35,3 @@ export const clickHandler = (
     cellsCopy[index] = x0;
     return cellsCopy;
 };
-
