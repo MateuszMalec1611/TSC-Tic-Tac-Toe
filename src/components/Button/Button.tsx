@@ -6,15 +6,24 @@ interface ButtonProps {
     typeOf: ButtonTypes;
     width: string;
     margin: string;
+    onClick?: () => void;
     path?: string;
     type?: 'submit' | 'reset' | 'button';
 }
 
-const Button: React.FC<ButtonProps> = ({ children, typeOf, width, margin, path, type }) => {
+const Button: React.FC<ButtonProps> = ({
+    children,
+    typeOf,
+    width,
+    margin,
+    onClick,
+    path,
+    type,
+}) => {
     return (
         <>
             {typeOf === ButtonTypes.BUTTON ? (
-                <StyledBtn margin={margin} width={width} type={type!}>
+                <StyledBtn onClick={onClick} margin={margin} width={width} type={type!}>
                     {children}
                 </StyledBtn>
             ) : (

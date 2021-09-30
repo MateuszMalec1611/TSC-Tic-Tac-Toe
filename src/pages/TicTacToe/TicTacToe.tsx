@@ -49,6 +49,12 @@ const TicTacToe = () => {
         setMovesLeft(prevState => prevState - 1);
     };
 
+    const resetGameHandler = () => {
+        setCells(Array(9).fill(null));
+        setXIsNext(true);
+        setMovesLeft(9);
+    };
+
     if (gameMode === GameMode.vsAi) {
         useEffect(() => {
             const aiMoveTimeout = setTimeout(() => aiMove(), 500);
@@ -78,7 +84,11 @@ const TicTacToe = () => {
                     <Button margin="0 10px 0 0" width="190px" typeOf={ButtonTypes.LINK} path="/">
                         back to menu
                     </Button>
-                    <Button margin="0 0 0 10px" width="max-content" typeOf={ButtonTypes.BUTTON}>
+                    <Button
+                        onClick={resetGameHandler}
+                        margin="0 0 0 10px"
+                        width="max-content"
+                        typeOf={ButtonTypes.BUTTON}>
                         restart
                     </Button>
                 </S.ButtonsBox>
