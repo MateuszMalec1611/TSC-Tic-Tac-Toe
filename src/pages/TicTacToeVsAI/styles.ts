@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { device } from 'src/utils/constants';
-import styled from 'styled-components';
 
 interface Xor0Props {
     Xor0: string;
