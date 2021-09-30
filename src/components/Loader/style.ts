@@ -1,5 +1,9 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { device } from 'src/utils/constants';
+
+interface LoadWrapperProps {
+    center?: boolean;
+}
 
 const rotate = keyframes`
   from {
@@ -9,6 +13,16 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
+`;
+
+const loaderCenterStyles = css`
+    display: flex;
+    align-items: center;
+    height: 100vh;
+`;
+
+export const LoadWrapper = styled.div<LoadWrapperProps>`
+    ${({ center }) => center && loaderCenterStyles}
 `;
 
 export const Load = styled.div`

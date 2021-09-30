@@ -1,9 +1,11 @@
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import Loader from './components/Loader/Loader';
 import { useAuth } from './hooks/useAuth';
-import Auth from './pages/Auth/Auth';
-import Menu from './pages/Menu/Menu';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
-import TicTacToe from './pages/TicTacToe/TicTacToe';
+const Auth = React.lazy(() => import('src/pages/Auth/Auth'));
+const Menu = React.lazy(() => import('src/pages/Menu/Menu'));
+const TicTacToe = React.lazy(() => import('src/pages/TicTacToe/TicTacToe'));
 import { Container, Wrapper } from './styles';
 
 const App = () => {
@@ -14,14 +16,16 @@ const App = () => {
             <Wrapper>
                 <Router>
                     <Switch>
-                        <Route exact path="/">
-                            {currentUser ? <Menu /> : <Redirect to="/auth" />}
-                        </Route>
-                        <Route path="/auth" component={Auth} />
-                        <Route path="/forgot-password" component={ResetPassword} />
-                        <Route path="/ticTacToe">
-                            {currentUser ? <TicTacToe /> : <Redirect to="/auth" />}
-                        </Route>
+                        <Suspense fallback={<Loader center={true} />}>
+                            <Route exact path="/">
+                                {currentUser ? <Menu /> : <Redirect to="/auth" />}
+                            </Route>
+                            <Route path="/auth" component={Auth} />
+                            <Route path="/forgot-password" component={ResetPassword} />
+                            <Route path="/ticTacToe">
+                                {currentUser ? <TicTacToe /> : <Redirect to="/auth" />}
+                            </Route>
+                        </Suspense>
                     </Switch>
                 </Router>
             </Wrapper>

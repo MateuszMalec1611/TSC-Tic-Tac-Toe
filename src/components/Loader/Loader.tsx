@@ -1,5 +1,13 @@
-import { Load } from './style';
+import { Load, LoadWrapper } from './style';
 
-const Loader = () => <Load></Load>;
+interface LoaderProps {
+    center?: boolean;
+}
+
+const Loader: React.FC<LoaderProps> = ({ center }) => (
+    <LoadWrapper center={center}>
+        <Load></Load>
+    </LoadWrapper>
+);
 
 export default Loader;

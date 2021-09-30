@@ -3,6 +3,8 @@ import { useQuery } from 'src/hooks/useQueryParams';
 import { calculateWinner } from 'src/utils/helpers';
 import { GameMode } from 'src/types/gameModes';
 import Board from 'src/components/Board/Board';
+import Button from 'src/components/Button/Button';
+import { ButtonTypes } from 'src/types/buttonTypes';
 import * as S from './styles';
 
 const TicTacToe = () => {
@@ -72,7 +74,14 @@ const TicTacToe = () => {
             </S.Info>
             <S.BoardBox>
                 <Board cells={cells!} onClick={clickHandler}></Board>
-                <S.ReturnBtn to="/">{'back to menu'}</S.ReturnBtn>
+                <S.ButtonsBox>
+                    <Button margin="0 10px 0 0" width="190px" typeOf={ButtonTypes.LINK} path="/">
+                        back to menu
+                    </Button>
+                    <Button margin="0 0 0 10px" width="max-content" typeOf={ButtonTypes.BUTTON}>
+                        restart
+                    </Button>
+                </S.ButtonsBox>
             </S.BoardBox>
         </S.Container>
     );
