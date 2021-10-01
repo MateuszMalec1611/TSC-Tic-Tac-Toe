@@ -7,8 +7,9 @@ import {
     signOut,
     User,
 } from '@firebase/auth';
-import { auth } from 'src/firebase';
+import { auth, database } from 'src/firebase';
 import { ProviderValue } from './Auth.types';
+import { doc, setDoc } from '@firebase/firestore';
 
 export const AuthContext = createContext({} as ProviderValue);
 
@@ -26,7 +27,18 @@ const AuthProvider: React.FC = ({ children }) => {
     }, []);
 
     const signup = (email: string, password: string) => {
-        return createUserWithEmailAndPassword(auth, email, password);
+        return createUserWithEmailAndPassword(auth, email, password).then(userCredential => {
+            const user = userCredential.user;
+            setDoc(doc(database, 'users', user.uid), {
+                email: user.email,
+            });
+            setDoc(doc(database, 'ranking', user.uid), {
+                email: user.email,
+                gamesPlayed: 0,
+                wonGames: 0,
+                lostGames: 0,
+            });
+        });
     };
 
     const login = (email: string, password: string) => {

@@ -49,7 +49,7 @@ const Form = () => {
             await useAction(AuthActions.LOGIN, 'Failed to login', '/', email, password);
         if (!loginFormType)
             await useAction(
-                AuthActions.LOGOUT,
+                AuthActions.SIGNUP,
                 'Failed to create an account',
                 '/',
                 email,

@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'src/hooks/useQueryParams';
 import { calculateWinner } from 'src/utils/helpers';
 import { clickHandler } from 'src/utils/helpers';
-import * as S from './styles';
 import TicTacToe from 'src/components/TicTacToe/TicTacToe';
 import GameModal from 'src/components/GameModal/GameModal';
 import TurnNavigator from 'src/components/TurnNavigator/TurnNavigator';
+import * as S from './styles';
 
 const TicTacToeVsAI = () => {
     const [cells, setCells] = useState<string[]>(Array(9).fill(null));
