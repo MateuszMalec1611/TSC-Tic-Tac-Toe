@@ -13,7 +13,11 @@ import * as S from './styles';
 const Form = () => {
     const [loginFormType, setLoginFormType] = useState(true);
     const {
-        ticTacToeState: { loading, error, errorMessage },
+        ticTacToeState: {
+            loading: { componentLoading },
+            error,
+            errorMessage,
+        },
     } = useTicTacToe();
     const useAction = useAuthAction();
 
@@ -115,7 +119,7 @@ const Form = () => {
                 </S.InputBox>
             )}
             {error && <S.Error block>{errorMessage}</S.Error>}
-            {loading ? (
+            {componentLoading ? (
                 <Loader />
             ) : (
                 <S.ButtonBox registerType={!loginFormType}>

@@ -9,13 +9,13 @@ import TicTacToeProvider from './store/TicTacToe/TicTacToe.context';
 
 ReactDOM.render(
     <React.StrictMode>
-        <AuthProvider>
-            <TicTacToeProvider>
+        <TicTacToeProvider>
+            <AuthProvider>
                 <ThemeProvider theme={theme}>
                     <App />
                 </ThemeProvider>
-            </TicTacToeProvider>
-        </AuthProvider>
+            </AuthProvider>
+        </TicTacToeProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

@@ -14,7 +14,11 @@ import * as S from 'src/components/Form/styles';
 
 const ResetPassword = () => {
     const {
-        ticTacToeState: { loading, error, errorMessage },
+        ticTacToeState: {
+            loading: { componentLoading },
+            error,
+            errorMessage,
+        },
     } = useTicTacToe();
     const useAction = useAuthAction();
     const [message, setMessage] = useState('');
@@ -57,7 +61,7 @@ const ResetPassword = () => {
 
                 {error && <S.Error block>{errorMessage}</S.Error>}
                 {!error && message.length > 0 && <Message>{message}</Message>}
-                {loading ? (
+                {componentLoading ? (
                     <Loader />
                 ) : (
                     <S.ButtonBox registerType={false}>

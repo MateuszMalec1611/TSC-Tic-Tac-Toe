@@ -6,10 +6,13 @@ export type ProviderValue = {
 };
 
 export interface TicTacToeState {
-    loading: boolean;
+    userData: DocumentData;
+    loading: {
+        appLoading?: boolean;
+        componentLoading?: boolean;
+    };
     error: boolean;
     errorMessage: string;
-    userData: DocumentData;
 }
 
 export type GetUserData = {
@@ -18,9 +21,12 @@ export type GetUserData = {
 };
 export type Loading = {
     type: TicTacToeActionType.LOADING;
-    payload: boolean;
+    payload: {
+        appLoading?: boolean;
+        componentLoading?: boolean;
+    };
 };
-    
+
 export type Error = {
     type: TicTacToeActionType.ERROR;
     payload: { error: boolean; errorMessage: string };

@@ -11,7 +11,7 @@ import {
 export const TicTacToeContext = createContext({} as ProviderValue);
 
 const initialState: TicTacToeState = {
-    loading: false,
+    loading: { appLoading: true, componentLoading: false },
     error: false,
     errorMessage: '',
     userData: {
@@ -53,24 +53,27 @@ const TicTacToeProvider: React.FC = ({ children }) => {
 
     const getUserData = async () => {
         try {
-            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: true });
+            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: { appLoading: true } });
             const data = await fetchUserData(currentUser.uid);
 
             if (!data) throw new Error('Failed to get user data');
+            console.log(data);
 
             ticTacToeDispatch({ type: TicTacToeActionType.GET_USER_DATA, payload: data });
         } catch (err: any) {
-            ticTacToeDispatch({
-                type: TicTacToeActionType.ERROR,
-                payload: { error: true, errorMessage: err.message },
-            });
+            alert(err.message);
         } finally {
-            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: false });
+            ticTacToeDispatch({
+                type: TicTacToeActionType.LOADING,
+                payload: { appLoading: false },
+            });
         }
     };
 
     useEffect(() => {
-        getUserData();
+        if (currentUser) {
+            getUserData();
+        }
     }, []);
 
     return (

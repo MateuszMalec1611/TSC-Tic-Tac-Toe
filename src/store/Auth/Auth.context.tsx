@@ -10,17 +10,27 @@ import {
 import { auth, database } from 'src/firebase';
 import { ProviderValue } from './Auth.types';
 import { doc, setDoc } from '@firebase/firestore';
+import { useTicTacToe } from 'src/hooks/useTicTacToe';
+import { TicTacToeActionType } from '../TicTacToe/TicTacToe.types';
 
 export const AuthContext = createContext({} as ProviderValue);
 
 const AuthProvider: React.FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<User | null>();
-    const [loading, setLoading] = useState(true);
+    const {
+        ticTacToeState: {
+            loading: { appLoading },
+        },
+        ticTacToeDispatch,
+    } = useTicTacToe();
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
-            setLoading(false);
+            ticTacToeDispatch({
+                type: TicTacToeActionType.LOADING,
+                payload: { appLoading: false },
+            });
         });
 
         return unsubscribe;
@@ -59,7 +69,7 @@ const AuthProvider: React.FC = ({ children }) => {
         resetPassword,
     };
 
-    return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={value}>{!appLoading && children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
