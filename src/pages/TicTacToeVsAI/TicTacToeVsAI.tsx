@@ -4,16 +4,19 @@ import { calculateWinner } from 'src/utils/helpers';
 import { clickHandler } from 'src/utils/helpers';
 import * as S from './styles';
 import TicTacToe from 'src/components/TicTacToe/TicTacToe';
+import GameModal from 'src/components/GameModal/GameModal';
+import TurnNavigator from 'src/components/TurnNavigator/TurnNavigator';
 
 const TicTacToeVsAI = () => {
     const [cells, setCells] = useState<string[]>(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
     const [movesLeft, setMovesLeft] = useState(9);
+    const [modalVisibility, setModalVisibility] = useState(false);
     const query = useQuery();
 
     const winner = calculateWinner(cells);
     const x0 = xIsNext ? 'X' : 'O';
-    const gameMode = query.get('name');
+    const gameMode = query.get('name')!;
 
     const click = (index: number) => {
         const cellsCopy = clickHandler(index, winner, cells, gameMode!, xIsNext, x0);
@@ -49,28 +52,31 @@ const TicTacToeVsAI = () => {
         setMovesLeft(9);
     };
 
+    const modalHandler = (show: boolean) => setModalVisibility(show);
+
+    useEffect(() => {
+        if (!!winner || !movesLeft) modalHandler(true);
+    }, [movesLeft]);
+
     useEffect(() => {
         const aiMoveTimeout = setTimeout(() => aiMove(), 500);
 
         return () => clearTimeout(aiMoveTimeout);
     }, [movesLeft]);
 
-    const gameInfo = (
-        <>
-            {!!movesLeft && !winner && <S.InfoText>next move ai</S.InfoText>}
-            {winner && <S.InfoText>won</S.InfoText>}
-            {!movesLeft && !winner && <S.InfoText>draw</S.InfoText>}
-        </>
-    );
-
     return (
         <S.Container>
-            <S.Info>
-                <S.X Xor0={!!winner ? winner : x0}>X</S.X>
-                {gameInfo}
-                <S.O Xor0={!!winner ? winner : x0}>0</S.O>
-            </S.Info>
+            <TurnNavigator winner={winner} x0={x0} movesLeft={movesLeft} />
             <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
+            {modalVisibility && (
+                <GameModal winner={winner} gameMode={gameMode} modalHandler={modalHandler}>
+                    <S.DescriptionBox>
+                        <S.DescTitle>games played: 2</S.DescTitle>
+                        <S.Description>won games: 10</S.Description>
+                        <S.Description>lost games: 2</S.Description>
+                    </S.DescriptionBox>
+                </GameModal>
+            )}
         </S.Container>
     );
 };
