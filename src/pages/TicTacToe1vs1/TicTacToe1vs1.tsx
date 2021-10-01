@@ -1,19 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'src/hooks/useQueryParams';
 import { calculateWinner } from 'src/utils/helpers';
 import { clickHandler } from 'src/utils/helpers';
 import TicTacToe from 'src/components/TicTacToe/TicTacToe';
+import GameModal from 'src/components/GameModal/GameModal';
+import TurnNavigator from 'src/components/TurnNavigator/TurnNavigator';
 import * as S from './styles';
 
 const TicTacToe1vs1 = () => {
     const [cells, setCells] = useState<string[]>(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
     const [movesLeft, setMovesLeft] = useState(9);
+    const [modalVisibility, setModalVisibility] = useState(false);
     const query = useQuery();
 
     const winner = calculateWinner(cells);
     const x0 = xIsNext ? 'X' : 'O';
-    const gameMode = query.get('name');
+    const gameMode = query.get('name')!;
 
     const click = (index: number) => {
         const cellsCopy = clickHandler(index, winner, cells, gameMode!, xIsNext, x0);
@@ -32,22 +35,19 @@ const TicTacToe1vs1 = () => {
         setMovesLeft(9);
     };
 
-    const gameInfo = (
-        <>
-            {!!movesLeft && !winner && <S.InfoText>next move</S.InfoText>}
-            {winner && <S.InfoText>won</S.InfoText>}
-            {!movesLeft && !winner && <S.InfoText>draw</S.InfoText>}
-        </>
-    );
+    const modalHandler = (show: boolean) => setModalVisibility(show);
+
+    useEffect(() => {
+        if (!!winner || !movesLeft) modalHandler(true);
+    }, [movesLeft]);
 
     return (
         <S.Container>
-            <S.Info>
-                <S.X Xor0={!!winner ? winner : x0}>X</S.X>
-                {/* {gameInfo} */}
-                <S.O Xor0={!!winner ? winner : x0}>0</S.O>
-            </S.Info>
+            <TurnNavigator winner={winner} x0={x0} movesLeft={movesLeft} />
             <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
+            {modalVisibility && (
+                <GameModal winner={winner} gameMode={gameMode} modalHandler={resetGameHandler} />
+            )}
         </S.Container>
     );
 };

@@ -5,7 +5,7 @@ import { useTicTacToe } from 'src/hooks/useTicTacToe';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
 import Loader from '../Loader/Loader';
-import Title from '../Title/Title';
+import AuthTitle from '../AuthTitle/AuthTitle';
 import Button from '../Button/Button';
 import { ButtonTypes } from 'src/types/buttonTypes';
 import * as S from './styles';
@@ -81,7 +81,7 @@ const Form = () => {
 
     return (
         <S.FormBox onSubmit={submitHandler}>
-            <Title>{loginFormType ? 'login' : 'register'}</Title>
+            <AuthTitle>{loginFormType ? 'login' : 'register'}</AuthTitle>
             <S.InputBox>
                 <S.Input
                     onBlur={isTouchedEmailHanlder}
