@@ -1,4 +1,5 @@
 import { DocumentData } from '@firebase/firestore';
+import { updatedUserData } from 'src/types/userData.types';
 
 export type ProviderValue = {
     ticTacToeState: TicTacToeState;
@@ -19,6 +20,12 @@ export type GetUserData = {
     type: TicTacToeActionType.GET_USER_DATA;
     payload: DocumentData;
 };
+
+export type UpdateUserData = {
+    type: TicTacToeActionType.UPDATE_USER_DATA;
+    payload: updatedUserData;
+};
+
 export type Loading = {
     type: TicTacToeActionType.LOADING;
     payload: {
@@ -32,10 +39,11 @@ export type Error = {
     payload: { error: boolean; errorMessage: string };
 };
 
-export type TicTacToeActions = GetUserData | Error | Loading;
+export type TicTacToeActions = GetUserData | UpdateUserData | Error | Loading;
 
 export enum TicTacToeActionType {
     GET_USER_DATA = 'GET_USER_DATA',
+    UPDATE_USER_DATA = 'UPDATE_USER_DATA',
     LOADING = 'LOADING',
     ERROR = 'ERROR',
 }

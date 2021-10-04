@@ -27,7 +27,17 @@ const reducer = (state: TicTacToeState, action: TicTacToeActions) => {
         case TicTacToeActionType.GET_USER_DATA:
             return {
                 ...state,
-                user: action.payload,
+                userData: action.payload,
+                error: false,
+            };
+        case TicTacToeActionType.UPDATE_USER_DATA:
+            return {
+                ...state,
+                userData: {
+                    gamesPlayed: action.payload.gamesPlayed,
+                    lostGames: action.payload.lostGames,
+                    wonGames: action.payload.wonGames,
+                },
                 error: false,
             };
         case TicTacToeActionType.LOADING:
@@ -50,14 +60,14 @@ const reducer = (state: TicTacToeState, action: TicTacToeActions) => {
 const TicTacToeProvider: React.FC = ({ children }) => {
     const [ticTacToeState, ticTacToeDispatch] = useReducer(reducer, initialState);
     const { currentUser } = useAuth();
-    
+
     const getUserData = async () => {
         try {
             ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: { appLoading: true } });
             const data = await fetchUserData(currentUser.uid);
-            
+
             if (!data) throw new Error('Failed to get user data');
-            
+
             ticTacToeDispatch({ type: TicTacToeActionType.GET_USER_DATA, payload: data });
         } catch (err: any) {
             alert(err.message);
@@ -68,7 +78,7 @@ const TicTacToeProvider: React.FC = ({ children }) => {
             });
         }
     };
-    
+
     useEffect(() => {
         if (currentUser) getUserData();
     }, [currentUser]);

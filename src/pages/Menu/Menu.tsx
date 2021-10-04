@@ -3,7 +3,7 @@ import Card from 'src/components/Card/Card';
 import Title from 'src/components/AuthTitle/AuthTitle';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
-import { ButtonTypes } from 'src/types/buttonTypes';
+import { ButtonTypes } from 'src/types/button.types';
 import * as S from './styles';
 
 const Menu = () => {

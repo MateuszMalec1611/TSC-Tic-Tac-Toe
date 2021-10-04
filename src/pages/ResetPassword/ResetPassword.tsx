@@ -9,7 +9,7 @@ import { AuthActions } from 'src/store/Auth/Auth.types';
 import AuthTitle from 'src/components/AuthTitle/AuthTitle';
 import { Message } from './styles';
 import Button from 'src/components/Button/Button';
-import { ButtonTypes } from 'src/types/buttonTypes';
+import { ButtonTypes } from 'src/types/button.types';
 import * as S from 'src/components/Form/styles';
 
 const ResetPassword = () => {
