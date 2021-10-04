@@ -11,7 +11,7 @@ import {
 export const TicTacToeContext = createContext({} as ProviderValue);
 
 const initialState: TicTacToeState = {
-    loading: { appLoading: true, componentLoading: false },
+    loading: { appLoading: false, componentLoading: false },
     error: false,
     errorMessage: '',
     userData: {
@@ -50,15 +50,14 @@ const reducer = (state: TicTacToeState, action: TicTacToeActions) => {
 const TicTacToeProvider: React.FC = ({ children }) => {
     const [ticTacToeState, ticTacToeDispatch] = useReducer(reducer, initialState);
     const { currentUser } = useAuth();
-
+    
     const getUserData = async () => {
         try {
             ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: { appLoading: true } });
             const data = await fetchUserData(currentUser.uid);
-
+            
             if (!data) throw new Error('Failed to get user data');
-            console.log(data);
-
+            
             ticTacToeDispatch({ type: TicTacToeActionType.GET_USER_DATA, payload: data });
         } catch (err: any) {
             alert(err.message);
@@ -69,12 +68,10 @@ const TicTacToeProvider: React.FC = ({ children }) => {
             });
         }
     };
-
+    
     useEffect(() => {
-        if (currentUser) {
-            getUserData();
-        }
-    }, []);
+        if (currentUser) getUserData();
+    }, [currentUser]);
 
     return (
         <TicTacToeContext.Provider value={{ ticTacToeState, ticTacToeDispatch }}>

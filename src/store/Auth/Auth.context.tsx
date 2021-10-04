@@ -10,44 +10,33 @@ import {
 import { auth, database } from 'src/firebase';
 import { ProviderValue } from './Auth.types';
 import { doc, setDoc } from '@firebase/firestore';
-import { useTicTacToe } from 'src/hooks/useTicTacToe';
-import { TicTacToeActionType } from '../TicTacToe/TicTacToe.types';
 
 export const AuthContext = createContext({} as ProviderValue);
 
 const AuthProvider: React.FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<User | null>();
-    const {
-        ticTacToeState: {
-            loading: { appLoading },
-        },
-        ticTacToeDispatch,
-    } = useTicTacToe();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
-            ticTacToeDispatch({
-                type: TicTacToeActionType.LOADING,
-                payload: { appLoading: false },
-            });
+            setLoading(false);
         });
 
         return unsubscribe;
     }, []);
 
-    const signup = (email: string, password: string) => {
-        return createUserWithEmailAndPassword(auth, email, password).then(userCredential => {
-            const user = userCredential.user;
-            setDoc(doc(database, 'users', user.uid), {
-                email: user.email,
-            });
-            setDoc(doc(database, 'ranking', user.uid), {
-                email: user.email,
-                gamesPlayed: 0,
-                wonGames: 0,
-                lostGames: 0,
-            });
+    const signup = async (email: string, password: string) => {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        setDoc(doc(database, 'users', user.uid), {
+            email: user.email,
+        });
+        setDoc(doc(database, 'ranking', user.uid), {
+            email: user.email,
+            gamesPlayed: 0,
+            wonGames: 0,
+            lostGames: 0,
         });
     };
 
@@ -69,7 +58,7 @@ const AuthProvider: React.FC = ({ children }) => {
         resetPassword,
     };
 
-    return <AuthContext.Provider value={value}>{!appLoading && children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

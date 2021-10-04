@@ -24,7 +24,7 @@ const App = () => {
                 <Router>
                     <Switch>
                         {appLoading ? (
-                            <Loader />
+                            <Loader center={true} />
                         ) : (
                             <Suspense fallback={<Loader center={true} />}>
                                 <Route exact path="/">
