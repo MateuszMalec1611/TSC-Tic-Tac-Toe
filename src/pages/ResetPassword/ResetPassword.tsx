@@ -6,7 +6,7 @@ import Loader from 'src/components/Loader/Loader';
 import { Card } from 'src/components/Card/styles';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
-import AuthTitle from 'src/components/AuthTitle/AuthTitle';
+import AuthTitle from 'src/components/Title/Title';
 import { Message } from './styles';
 import Button from 'src/components/Button/Button';
 import { ButtonTypes } from 'src/types/button.types';

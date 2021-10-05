@@ -8,6 +8,7 @@ const ResetPassword = React.lazy(() => import('src/pages/ResetPassword/ResetPass
 const Menu = React.lazy(() => import('src/pages/Menu/Menu'));
 const TicTacToe1vs1 = React.lazy(() => import('src/pages/TicTacToe1vs1/TicTacToe1vs1'));
 const TicTacToeVsAI = React.lazy(() => import('src/pages/TicTacToeVsAI/TicTacToeVsAI'));
+const Ranking = React.lazy(() => import('src/pages/Ranking/Ranking'));
 import { Container, Wrapper } from './styles';
 
 const App = () => {
@@ -37,6 +38,9 @@ const App = () => {
                                 </Route>
                                 <Route path="/ticTacToe/vsAI">
                                     {currentUser ? <TicTacToeVsAI /> : <Redirect to="/auth" />}
+                                </Route>
+                                <Route path="/ranking">
+                                    {currentUser ? <Ranking /> : <Redirect to="/auth" />}
                                 </Route>
                             </Suspense>
                         )}

@@ -5,7 +5,7 @@ import { useTicTacToe } from 'src/hooks/useTicTacToe';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
 import Loader from '../Loader/Loader';
-import AuthTitle from '../AuthTitle/AuthTitle';
+import AuthTitle from '../Title/Title';
 import Button from '../Button/Button';
 import { ButtonTypes } from 'src/types/button.types';
 import * as S from './styles';
