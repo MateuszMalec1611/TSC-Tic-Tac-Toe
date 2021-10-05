@@ -64,7 +64,7 @@ const TicTacToeProvider: React.FC = ({ children }) => {
     const getUserData = async () => {
         try {
             ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: { appLoading: true } });
-            const data = await fetchUserData(currentUser.uid);
+            const data = await fetchUserData(currentUser.email);
 
             if (!data) throw new Error('Failed to get user data');
 

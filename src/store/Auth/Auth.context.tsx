@@ -29,11 +29,9 @@ const AuthProvider: React.FC = ({ children }) => {
     const signup = async (email: string, password: string) => {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        setDoc(doc(database, 'users', user.uid), {
+        setDoc(doc(database, 'ranking', user.email!), {
             email: user.email,
-        });
-        setDoc(doc(database, 'ranking', user.uid), {
-            email: user.email,
+            uid: user.uid,
             gamesPlayed: 0,
             wonGames: 0,
             lostGames: 0,

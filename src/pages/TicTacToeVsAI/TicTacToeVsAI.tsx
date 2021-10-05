@@ -78,7 +78,7 @@ const TicTacToeVsAI = () => {
                     payload: { componentLoading: true },
                 });
 
-                await setUserData(currentUser.uid, updatedUserData);
+                await setUserData(currentUser.email, updatedUserData);
                 ticTacToeDispatch({
                     type: TicTacToeActionType.UPDATE_USER_DATA,
                     payload: updatedUserData,
@@ -97,6 +97,7 @@ const TicTacToeVsAI = () => {
     const modalHandler = (show: boolean) => setModalVisibility(show);
 
     useEffect(() => {
+        console.log(!movesLeft);
         if (!!winner || !movesLeft) updateUserData();
     }, [movesLeft]);
 
@@ -105,7 +106,6 @@ const TicTacToeVsAI = () => {
 
         return () => clearTimeout(aiMoveTimeout);
     }, [movesLeft]);
-    console.log(userData.gamesPlayed);
 
     return (
         <S.Container>
