@@ -42,7 +42,11 @@ const Ranking = () => {
         getUsersData();
     }, []);
 
-    const sortedUserStats = usersData.sort((a, b) => b.wonGames - a.wonGames);
+    const sortedUserStats = usersData.sort((a, b) => {
+        const aStats = a.wonGames - a.lostGames;
+        const bStats = b.wonGames - b.lostGames;
+        return bStats - aStats;
+    });
     const usersStats = sortedUserStats.map((stats, index) => (
         <UserStats key={stats.uid} stats={stats} index={index} />
     ));
