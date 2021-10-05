@@ -46,7 +46,7 @@ const TicTacToe1vs1 = () => {
             <TurnNavigator winner={winner} x0={x0} movesLeft={movesLeft} />
             <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
             {modalVisibility && (
-                <GameModal winner={winner} gameMode={gameMode} modalHandler={resetGameHandler} />
+                <GameModal winner={winner} gameMode={gameMode} modalHandler={modalHandler} />
             )}
         </S.Container>
     );

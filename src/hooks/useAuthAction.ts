@@ -17,7 +17,10 @@ const useAuthAction = () => {
         password?: string
     ) => {
         try {
-            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: true });
+            ticTacToeDispatch({
+                type: TicTacToeActionType.LOADING,
+                payload: { componentLoading: true },
+            });
 
             switch (action) {
                 case AuthActions.LOGIN:
@@ -44,7 +47,10 @@ const useAuthAction = () => {
                 payload: { error: true, errorMessage: errorMess },
             });
         } finally {
-            ticTacToeDispatch({ type: TicTacToeActionType.LOADING, payload: false });
+            ticTacToeDispatch({
+                type: TicTacToeActionType.LOADING,
+                payload: { componentLoading: false },
+            });
         }
     };
     return useAction;

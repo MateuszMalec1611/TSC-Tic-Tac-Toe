@@ -1,17 +1,37 @@
+import { DocumentData } from '@firebase/firestore';
+import { updatedUserData } from 'src/types/userData.types';
+
 export type ProviderValue = {
     ticTacToeState: TicTacToeState;
     ticTacToeDispatch: (action: TicTacToeActions) => void;
 };
 
 export interface TicTacToeState {
-    loading: boolean;
+    userData: DocumentData;
+    loading: {
+        appLoading?: boolean;
+        componentLoading?: boolean;
+    };
     error: boolean;
     errorMessage: string;
 }
 
+export type GetUserData = {
+    type: TicTacToeActionType.GET_USER_DATA;
+    payload: DocumentData;
+};
+
+export type UpdateUserData = {
+    type: TicTacToeActionType.UPDATE_USER_DATA;
+    payload: updatedUserData;
+};
+
 export type Loading = {
     type: TicTacToeActionType.LOADING;
-    payload: boolean;
+    payload: {
+        appLoading?: boolean;
+        componentLoading?: boolean;
+    };
 };
 
 export type Error = {
@@ -19,9 +39,11 @@ export type Error = {
     payload: { error: boolean; errorMessage: string };
 };
 
-export type TicTacToeActions = Error | Loading;
+export type TicTacToeActions = GetUserData | UpdateUserData | Error | Loading;
 
 export enum TicTacToeActionType {
+    GET_USER_DATA = 'GET_USER_DATA',
+    UPDATE_USER_DATA = 'UPDATE_USER_DATA',
     LOADING = 'LOADING',
     ERROR = 'ERROR',
 }

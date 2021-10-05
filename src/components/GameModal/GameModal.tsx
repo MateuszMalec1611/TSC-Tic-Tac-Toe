@@ -1,5 +1,5 @@
-import { ButtonTypes } from 'src/types/buttonTypes';
-import { GameMode } from 'src/types/gameModes';
+import { ButtonTypes } from 'src/types/button.types';
+import { GameMode } from 'src/types/gameModes.types';
 import Button from '../Button/Button';
 import * as S from './styles';
 

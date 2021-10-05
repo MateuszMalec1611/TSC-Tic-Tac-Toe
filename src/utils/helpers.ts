@@ -1,4 +1,4 @@
-import { GameMode } from 'src/types/gameModes';
+import { GameMode } from 'src/types/gameModes.types';
 
 export const calculateWinner = (cells: string[]) => {
     const lines = [

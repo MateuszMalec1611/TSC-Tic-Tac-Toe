@@ -7,13 +7,17 @@ import { AuthActions } from 'src/store/Auth/Auth.types';
 import Loader from '../Loader/Loader';
 import AuthTitle from '../AuthTitle/AuthTitle';
 import Button from '../Button/Button';
-import { ButtonTypes } from 'src/types/buttonTypes';
+import { ButtonTypes } from 'src/types/button.types';
 import * as S from './styles';
 
 const Form = () => {
     const [loginFormType, setLoginFormType] = useState(true);
     const {
-        ticTacToeState: { loading, error, errorMessage },
+        ticTacToeState: {
+            loading: { componentLoading },
+            error,
+            errorMessage,
+        },
     } = useTicTacToe();
     const useAction = useAuthAction();
 
@@ -49,7 +53,7 @@ const Form = () => {
             await useAction(AuthActions.LOGIN, 'Failed to login', '/', email, password);
         if (!loginFormType)
             await useAction(
-                AuthActions.LOGOUT,
+                AuthActions.SIGNUP,
                 'Failed to create an account',
                 '/',
                 email,
@@ -115,7 +119,7 @@ const Form = () => {
                 </S.InputBox>
             )}
             {error && <S.Error block>{errorMessage}</S.Error>}
-            {loading ? (
+            {componentLoading ? (
                 <Loader />
             ) : (
                 <S.ButtonBox registerType={!loginFormType}>
