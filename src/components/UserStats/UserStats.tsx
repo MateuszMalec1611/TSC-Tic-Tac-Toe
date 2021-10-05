@@ -3,12 +3,14 @@ import * as S from './styles';
 
 interface UserStatsProps {
     stats: DocumentData;
+    index: number;
 }
 
-const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
+const UserStats: React.FC<UserStatsProps> = ({ stats, index }) => {
     const { email, gamesPlayed, wonGames, lostGames } = stats;
     return (
         <S.StatsBox>
+            <S.Position position={index}>{index + 1}</S.Position>
             <S.Email>{email}</S.Email>
             <S.DescBox>
                 <S.Desc>

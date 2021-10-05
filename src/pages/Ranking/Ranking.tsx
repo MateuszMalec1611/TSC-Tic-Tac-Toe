@@ -42,7 +42,10 @@ const Ranking = () => {
         getUsersData();
     }, []);
 
-    const usersStats = usersData.map(stats => <UserStats key={stats.uid} stats={stats} />);
+    const sortedUserStats = usersData.sort((a, b) => b.wonGames - a.wonGames);
+    const usersStats = sortedUserStats.map((stats, index) => (
+        <UserStats key={stats.uid} stats={stats} index={index} />
+    ));
 
     return (
         <Card>
