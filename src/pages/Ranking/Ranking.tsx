@@ -1,10 +1,13 @@
 import { useCallback, useEffect } from 'react';
+import Button from 'src/components/Button/Button';
 import Card from 'src/components/Card/Card';
 import Loader from 'src/components/Loader/Loader';
 import Title from 'src/components/Title/Title';
+import UserStats from 'src/components/UserStats/UserStats';
 import { useTicTacToe } from 'src/hooks/useTicTacToe';
 import { fetchUsersData } from 'src/store/TicTacToe/TicTacToe.services';
 import { TicTacToeActionType } from 'src/store/TicTacToe/TicTacToe.types';
+import { ButtonTypes } from 'src/types/button.types';
 import * as S from './styles';
 
 const Ranking = () => {
@@ -39,10 +42,20 @@ const Ranking = () => {
         getUsersData();
     }, []);
 
+    const usersStats = usersData.map(stats => <UserStats key={stats.uid} stats={stats} />);
+
     return (
         <Card>
             <S.Box>
                 <Title>ranking</Title>
+                {componentLoading ? (
+                    <Loader />
+                ) : (
+                    <S.UsersStatsWrapper>{usersStats}</S.UsersStatsWrapper>
+                )}
+                <Button margin="20px 0 0 0" width="190px" typeOf={ButtonTypes.LINK} path="/">
+                    back to menu
+                </Button>
             </S.Box>
         </Card>
     );
