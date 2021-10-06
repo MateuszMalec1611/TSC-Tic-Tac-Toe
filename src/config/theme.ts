@@ -8,6 +8,7 @@ const theme: DefaultTheme = {
         redColor: 'tomato',
         greenColor: '#42f54b',
         lightGrayColor: '#535353',
+        darkerGrayColor: '#2d2d2dc2',
         transparentBlackColor: '#000000c2',
         transparentGrayColor: 'rgb(255 255 255 / 75%)',
     },

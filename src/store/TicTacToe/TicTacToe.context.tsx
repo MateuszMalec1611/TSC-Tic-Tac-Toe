@@ -20,6 +20,7 @@ const initialState: TicTacToeState = {
         lostGames: 0,
         wonGames: 0,
     },
+    usersData: [],
 };
 
 const reducer = (state: TicTacToeState, action: TicTacToeActions) => {
@@ -28,6 +29,12 @@ const reducer = (state: TicTacToeState, action: TicTacToeActions) => {
             return {
                 ...state,
                 userData: action.payload,
+                error: false,
+            };
+        case TicTacToeActionType.GET_USERS_DATA:
+            return {
+                ...state,
+                usersData: action.payload,
                 error: false,
             };
         case TicTacToeActionType.UPDATE_USER_DATA:

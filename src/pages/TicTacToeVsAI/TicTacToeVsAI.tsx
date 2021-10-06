@@ -19,7 +19,7 @@ const TicTacToeVsAI = () => {
     const { currentUser } = useAuth();
     const {
         ticTacToeDispatch,
-        ticTacToeState: { userData, error },
+        ticTacToeState: { userData },
     } = useTicTacToe();
     const query = useQuery();
 
@@ -97,7 +97,6 @@ const TicTacToeVsAI = () => {
     const modalHandler = (show: boolean) => setModalVisibility(show);
 
     useEffect(() => {
-        console.log(!movesLeft);
         if (!!winner || !movesLeft) updateUserData();
     }, [movesLeft]);
 

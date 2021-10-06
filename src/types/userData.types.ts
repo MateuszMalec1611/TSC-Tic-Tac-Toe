@@ -1,4 +1,4 @@
-export type updatedUserData = {
+export type UpdatedUserData = {
     gamesPlayed: number;
     lostGames: number;
     wonGames: number;

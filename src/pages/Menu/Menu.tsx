@@ -1,6 +1,6 @@
 import Button from 'src/components/Button/Button';
 import Card from 'src/components/Card/Card';
-import Title from 'src/components/AuthTitle/AuthTitle';
+import Title from 'src/components/Title/Title';
 import useAuthAction from 'src/hooks/useAuthAction';
 import { AuthActions } from 'src/store/Auth/Auth.types';
 import { ButtonTypes } from 'src/types/button.types';
@@ -32,7 +32,7 @@ const Menu = () => {
                             path="/ticTacToe/vsAI?name=vsAI">
                             vs ai
                         </Button>
-                        <Button margin="26px 0 0 0" width="100%" typeOf={ButtonTypes.LINK} path="/">
+                        <Button margin="26px 0 0 0" width="100%" typeOf={ButtonTypes.LINK} path="/ranking">
                             ranking
                         </Button>
                         <S.Button onClick={logoutHandling}>Logout</S.Button>
