@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Loader from './components/Loader/Loader';
 import { useAuth } from './hooks/useAuth';
 import { useTicTacToe } from './hooks/useTicTacToe';
