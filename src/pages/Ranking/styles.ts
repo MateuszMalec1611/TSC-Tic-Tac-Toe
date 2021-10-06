@@ -1,19 +1,27 @@
-import { device } from 'src/utils/constants';
 import styled from 'styled-components';
+import { show } from 'src/shared/animations';
+import { device } from 'src/utils/constants';
 
 export const Box = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    min-height: 400px;
     width: 100%;
+
+    @media ${device.tabletBreakpoint} {
+        min-height: 470px;
+    }
 `;
 export const UsersStatsWrapper = styled.ul`
     display: flex;
     flex-direction: column;
     height: 250px;
     width: 100%;
-    overflow-y: scroll;
     list-style: none;
+    overflow-y: scroll;
+    animation: ${show} .5s ease-in;
 
     &::-webkit-scrollbar {
         height: 4px;
