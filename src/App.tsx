@@ -9,6 +9,7 @@ const Menu = React.lazy(() => import('src/pages/Menu/Menu'));
 const TicTacToe1vs1 = React.lazy(() => import('src/pages/TicTacToe1vs1/TicTacToe1vs1'));
 const TicTacToeVsAI = React.lazy(() => import('src/pages/TicTacToeVsAI/TicTacToeVsAI'));
 const Ranking = React.lazy(() => import('src/pages/Ranking/Ranking'));
+const Profile = React.lazy(() => import('src/pages/Profile/Profile'));
 import { Container, Wrapper } from './styles';
 
 const App = () => {
@@ -41,6 +42,9 @@ const App = () => {
                                 </Route>
                                 <Route path="/ranking">
                                     {currentUser ? <Ranking /> : <Redirect to="/auth" />}
+                                </Route>
+                                <Route path="/profile">
+                                    {currentUser ? <Profile /> : <Redirect to="/auth" />}
                                 </Route>
                             </Suspense>
                         )}
