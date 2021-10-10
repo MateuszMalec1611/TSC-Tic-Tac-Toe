@@ -8,4 +8,6 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 `;

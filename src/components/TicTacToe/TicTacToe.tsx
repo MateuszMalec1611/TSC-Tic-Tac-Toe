@@ -1,5 +1,5 @@
+import { useHistory } from 'react-router';
 import { useTicTacToe } from 'src/hooks/useTicTacToe';
-import { ButtonTypes } from 'src/types/button.types';
 import Board from '../Board/Board';
 import Button from '../Button/Button';
 import Loader from '../Loader/Loader';
@@ -17,6 +17,10 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ cells, clickHandler, resetGameHan
             loading: { componentLoading },
         },
     } = useTicTacToe();
+    const history = useHistory();
+
+    const redirectHandler = (path: string) => history.push(path);
+
     return (
         <>
             <S.BoardBox>
@@ -27,17 +31,15 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ cells, clickHandler, resetGameHan
                     ) : (
                         <>
                             <Button
+                                onClick={() => redirectHandler('/')}
                                 margin="0 10px 0 0"
-                                width="190px"
-                                typeOf={ButtonTypes.LINK}
-                                path="/">
+                                width="190px">
                                 back to menu
                             </Button>
                             <Button
                                 onClick={resetGameHandler}
                                 margin="0 0 0 10px"
-                                width="max-content"
-                                typeOf={ButtonTypes.BUTTON}>
+                                width="max-content">
                                 restart
                             </Button>
                         </>

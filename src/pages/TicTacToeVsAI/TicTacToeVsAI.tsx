@@ -71,27 +71,26 @@ const TicTacToeVsAI = () => {
         if (winner === 'O') updatedUserData.lostGames = +userData.lostGames + 1;
         if (winner === 'X') updatedUserData.wonGames = +userData.wonGames + 1;
 
-        if (!!winner)
-            try {
-                ticTacToeDispatch({
-                    type: TicTacToeActionType.LOADING,
-                    payload: { componentLoading: true },
-                });
+        try {
+            ticTacToeDispatch({
+                type: TicTacToeActionType.LOADING,
+                payload: { componentLoading: true },
+            });
 
-                await setUserData(currentUser.email, updatedUserData);
-                ticTacToeDispatch({
-                    type: TicTacToeActionType.UPDATE_USER_DATA,
-                    payload: updatedUserData,
-                });
-                modalHandler(true);
-            } catch (err: any) {
-                alert(err.message);
-            } finally {
-                ticTacToeDispatch({
-                    type: TicTacToeActionType.LOADING,
-                    payload: { componentLoading: false },
-                });
-            }
+            await setUserData(currentUser.email, updatedUserData);
+            ticTacToeDispatch({
+                type: TicTacToeActionType.UPDATE_USER_DATA,
+                payload: updatedUserData,
+            });
+            modalHandler(true);
+        } catch (err: any) {
+            alert(err.message);
+        } finally {
+            ticTacToeDispatch({
+                type: TicTacToeActionType.LOADING,
+                payload: { componentLoading: false },
+            });
+        }
     };
 
     const modalHandler = (show: boolean) => setModalVisibility(show);

@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Button from 'src/components/Button/Button';
 import Card from 'src/components/Card/Card';
 import Loader from 'src/components/Loader/Loader';
@@ -7,7 +8,6 @@ import UserStats from 'src/components/UserStats/UserStats';
 import { useTicTacToe } from 'src/hooks/useTicTacToe';
 import { fetchUsersData } from 'src/store/TicTacToe/TicTacToe.services';
 import { TicTacToeActionType } from 'src/store/TicTacToe/TicTacToe.types';
-import { ButtonTypes } from 'src/types/button.types';
 import * as S from './styles';
 
 const Ranking = () => {
@@ -18,6 +18,7 @@ const Ranking = () => {
             usersData,
         },
     } = useTicTacToe();
+    const history = useHistory();
 
     const getUsersData = useCallback(async () => {
         try {
@@ -37,6 +38,8 @@ const Ranking = () => {
             });
         }
     }, []);
+
+    const redirectHandler = (path: string) => history.push(path);
 
     useEffect(() => {
         getUsersData();
@@ -60,7 +63,7 @@ const Ranking = () => {
                 ) : (
                     <S.UsersStatsWrapper>{usersStats}</S.UsersStatsWrapper>
                 )}
-                <Button margin="20px 0 0 0" width="190px" typeOf={ButtonTypes.LINK} path="/">
+                <Button onClick={() => redirectHandler('/')} margin="20px 0 0 0" width="190px">
                     back to menu
                 </Button>
             </S.Box>

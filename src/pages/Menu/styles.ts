@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
-export const MenuBox = styled.div``;
+export const MenuBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 export const ButtonsBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 160px;
 `;
-
 export const Button = styled.button`
     padding: 5px 0;
     margin-top: 26px;
