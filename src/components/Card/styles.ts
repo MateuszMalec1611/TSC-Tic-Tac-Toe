@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const Card = styled.div`
+export const Card = styled(motion.div)<any>`
     padding: 20px;
     display: flex;
     justify-content: center;

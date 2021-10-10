@@ -1,5 +1,6 @@
+import { AnimatePresence } from 'framer-motion';
 import React, { Suspense } from 'react';
-import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Loader from './components/Loader/Loader';
 import { useAuth } from './hooks/useAuth';
 import { useTicTacToe } from './hooks/useTicTacToe';
@@ -23,7 +24,7 @@ const App = () => {
     return (
         <Container>
             <Wrapper>
-                <Router>
+                <AnimatePresence>
                     <Switch>
                         {appLoading ? (
                             <Loader center={true} />
@@ -49,7 +50,7 @@ const App = () => {
                             </Suspense>
                         )}
                     </Switch>
-                </Router>
+                </AnimatePresence>
             </Wrapper>
         </Container>
     );

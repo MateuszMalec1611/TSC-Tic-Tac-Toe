@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from './config/theme';
 import './index.css';
@@ -12,7 +13,9 @@ ReactDOM.render(
         <AuthProvider>
             <TicTacToeProvider>
                 <ThemeProvider theme={theme}>
-                    <App />
+                    <Router>
+                        <App />
+                    </Router>
                 </ThemeProvider>
             </TicTacToeProvider>
         </AuthProvider>

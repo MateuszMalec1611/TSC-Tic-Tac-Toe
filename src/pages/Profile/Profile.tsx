@@ -24,7 +24,7 @@ const Profile = () => {
                     <S.Description>won games: {userData.wonGames}</S.Description>
                 </S.DescBox>
                 <Button onClick={() => redirectHandler('/')} margin="20px 0 0 0" width="100%">
-                    menu
+                    back to menu
                 </Button>
             </S.ProfileBox>
         </Card>
