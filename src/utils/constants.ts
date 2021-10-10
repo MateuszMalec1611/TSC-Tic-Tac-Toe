@@ -31,6 +31,7 @@ export const pageTransition = {
     ease: 'circOut',
     duration: 0.7,
 };
+
 export const pageProps = {
     initial: 'out',
     animate: 'in',
