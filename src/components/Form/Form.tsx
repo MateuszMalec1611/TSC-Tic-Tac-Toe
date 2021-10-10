@@ -7,7 +7,6 @@ import { AuthActions } from 'src/store/Auth/Auth.types';
 import Loader from '../Loader/Loader';
 import AuthTitle from '../Title/Title';
 import Button from '../Button/Button';
-import { ButtonTypes } from 'src/types/button.types';
 import * as S from './styles';
 
 const Form = () => {
@@ -123,11 +122,7 @@ const Form = () => {
                 <Loader />
             ) : (
                 <S.ButtonBox registerType={!loginFormType}>
-                    <Button
-                        margin="0"
-                        type="submit"
-                        typeOf={ButtonTypes.BUTTON}
-                        width="max-content">
+                    <Button margin="0" type="submit" width="max-content">
                         {loginFormType ? 'login' : 'register'}
                     </Button>
                     <S.LinkBox loginFormType={loginFormType}>

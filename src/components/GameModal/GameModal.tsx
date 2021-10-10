@@ -1,4 +1,3 @@
-import { ButtonTypes } from 'src/types/button.types';
 import { GameMode } from 'src/types/gameModes.types';
 import Button from '../Button/Button';
 import * as S from './styles';
@@ -19,11 +18,7 @@ const GameModal: React.FC<GameModalProps> = ({ children, winner, gameMode, modal
             <S.ModalWrapper>
                 {gameMode === GameMode['1vs1'] ? firstGameModeHeader : vsAIModeHeader}
                 {children}
-                <Button
-                    onClick={() => modalHandler(false)}
-                    margin="28px 0"
-                    width="max-content"
-                    typeOf={ButtonTypes.BUTTON}>
+                <Button onClick={() => modalHandler(false)} margin="28px 0" width="max-content">
                     close
                 </Button>
             </S.ModalWrapper>

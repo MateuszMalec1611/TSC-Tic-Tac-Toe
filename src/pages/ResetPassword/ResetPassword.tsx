@@ -9,7 +9,6 @@ import { AuthActions } from 'src/store/Auth/Auth.types';
 import AuthTitle from 'src/components/Title/Title';
 import { Message } from './styles';
 import Button from 'src/components/Button/Button';
-import { ButtonTypes } from 'src/types/button.types';
 import * as S from 'src/components/Form/styles';
 
 const ResetPassword = () => {
@@ -68,7 +67,6 @@ const ResetPassword = () => {
                         <Button
                             margin="0"
                             type="submit"
-                            typeOf={ButtonTypes.BUTTON}
                             width="max-content">
                             reset
                         </Button>
