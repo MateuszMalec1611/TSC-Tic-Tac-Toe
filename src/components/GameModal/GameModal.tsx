@@ -10,7 +10,11 @@ interface GameModalProps {
 
 const GameModal: React.FC<GameModalProps> = ({ children, winner, gameMode, modalHandler }) => {
     const firstGameModeHeader = <S.Header>{!!winner ? `"${winner}" won` : 'draw'}</S.Header>;
-    const vsAIModeHeader = <S.Header>{winner === 'X' ? `you won` : 'you lose'}</S.Header>;
+    const vsAIModeHeader = !winner ? (
+        <S.Header>draw</S.Header>
+    ) : (
+        <S.Header>{winner === 'X' ? `you won` : 'you lose'}</S.Header>
+    );
 
     return (
         <>
