@@ -8,11 +8,9 @@ interface ButtonsProps {
 }
 
 export const StyledBtn = styled.button<ButtonsProps>`
-    padding: 7px 15px;
+    padding: 10px 15px;
     margin: ${({ margin }) => margin};
     width: ${({ width }) => width};
-    height: 32px;
-    padding: 5px 15px;
     font-size: ${({ theme }) => theme.fontSizes.XS};
     background-color: ${({ theme }) => theme.colors.whiteColor};
     color: ${({ theme }) => theme.colors.transparentBlackColor};
@@ -32,8 +30,7 @@ export const StyledBtn = styled.button<ButtonsProps>`
     }
 
     @media ${device.tabletBreakpoint} {
-        padding: 8px 16px;
-        height: 37px;
+        padding: 12px 16px;
         font-size: ${({ theme }) => theme.fontSizes.S};
     }
 `;

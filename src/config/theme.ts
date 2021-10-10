@@ -21,6 +21,7 @@ const theme: DefaultTheme = {
         XXL: '22px',
         XXXL: '26px',
         XXXXL: '36px',
+        ExtraSLarge: '46px',
         ExtraLarge: '60px'
     },
 };
