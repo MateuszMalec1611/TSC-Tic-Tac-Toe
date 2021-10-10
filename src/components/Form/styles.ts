@@ -44,6 +44,7 @@ export const Input = styled.input`
     font-size: ${({ theme }) => theme.fontSizes.M};
     color: ${({ theme }) => theme.colors.fontColor};
     border: none;
+    border-radius: 0;
     border-bottom: 1px solid white;
     z-index: 1;
     outline: none;
@@ -105,7 +106,9 @@ export const Button = styled.button`
     }
 `;
 export const Text = styled.a`
-    padding: 5px 10px;
+    display: block;
+    margin-top: 5px;
+    padding: 0px 10px;
     font-size: ${({ theme }) => theme.fontSizes.S};
 
     @media ${device.tabletBreakpoint} {

@@ -19,20 +19,18 @@ const Button: React.FC<ButtonProps> = ({
     onClick,
     path,
     type,
-}) => {
-    return (
-        <>
-            {typeOf === ButtonTypes.BUTTON ? (
-                <StyledBtn onClick={onClick} margin={margin} width={width} type={type!}>
-                    {children}
-                </StyledBtn>
-            ) : (
-                <StyledLink margin={margin} width={width} to={path!}>
-                    {children}
-                </StyledLink>
-            )}
-        </>
-    );
-};
+}) => (
+    <>
+        {typeOf === ButtonTypes.BUTTON ? (
+            <StyledBtn onClick={onClick} margin={margin} width={width} type={type!}>
+                {children}
+            </StyledBtn>
+        ) : (
+            <StyledLink margin={margin} width={width} to={path!}>
+                {children}
+            </StyledLink>
+        )}
+    </>
+);
 
 export default Button;
