@@ -39,6 +39,12 @@ const Menu = () => {
                             width="100%">
                             ranking
                         </Button>
+                        <Button
+                            onClick={() => redirectHandler('/profile')}
+                            margin="26px 0 0 0"
+                            width="100%">
+                            profile
+                        </Button>
                         <S.Button onClick={logoutHandling}>Logout</S.Button>
                     </S.ButtonsBox>
                 </S.MenuBox>
