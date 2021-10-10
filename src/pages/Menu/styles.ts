@@ -11,7 +11,6 @@ export const ButtonsBox = styled.div`
     align-items: center;
     width: 160px;
 `;
-
 export const Button = styled.button`
     padding: 5px 0;
     margin-top: 26px;

@@ -82,7 +82,6 @@ const TicTacToeVsAI = () => {
                 type: TicTacToeActionType.UPDATE_USER_DATA,
                 payload: updatedUserData,
             });
-            console.log(`modal`);
             modalHandler(true);
         } catch (err: any) {
             alert(err.message);
