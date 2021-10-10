@@ -16,40 +16,38 @@ const Menu = () => {
     const redirectHandler = (path: string) => history.push(path);
 
     return (
-        <>
-            <Card>
-                <S.MenuBox>
-                    <Title>Menu</Title>
-                    <S.ButtonsBox>
-                        <Button
-                            onClick={() => redirectHandler('/ticTacToe/1vs1?name=1vs1')}
-                            margin="26px 0 0 0"
-                            width="100%">
-                            1 vs 1
-                        </Button>
-                        <Button
-                            onClick={() => redirectHandler('/ticTacToe/vsAI?name=vsAI')}
-                            margin="26px 0 0 0"
-                            width="100%">
-                            vs ai
-                        </Button>
-                        <Button
-                            onClick={() => redirectHandler('/ranking')}
-                            margin="26px 0 0 0"
-                            width="100%">
-                            ranking
-                        </Button>
-                        <Button
-                            onClick={() => redirectHandler('/profile')}
-                            margin="26px 0 0 0"
-                            width="100%">
-                            profile
-                        </Button>
-                        <S.Button onClick={logoutHandling}>Logout</S.Button>
-                    </S.ButtonsBox>
-                </S.MenuBox>
-            </Card>
-        </>
+        <Card>
+            <S.MenuBox>
+                <Title>Menu</Title>
+                <S.ButtonsBox>
+                    <Button
+                        onClick={() => redirectHandler('/ticTacToe/1vs1?name=1vs1')}
+                        margin="26px 0 0 0"
+                        width="100%">
+                        1 vs 1
+                    </Button>
+                    <Button
+                        onClick={() => redirectHandler('/ticTacToe/vsAI?name=vsAI')}
+                        margin="26px 0 0 0"
+                        width="100%">
+                        vs ai
+                    </Button>
+                    <Button
+                        onClick={() => redirectHandler('/ranking')}
+                        margin="26px 0 0 0"
+                        width="100%">
+                        ranking
+                    </Button>
+                    <Button
+                        onClick={() => redirectHandler('/profile')}
+                        margin="26px 0 0 0"
+                        width="100%">
+                        profile
+                    </Button>
+                    <S.Button onClick={logoutHandling}>Logout</S.Button>
+                </S.ButtonsBox>
+            </S.MenuBox>
+        </Card>
     );
 };
 

@@ -55,19 +55,19 @@ const Ranking = () => {
     ));
 
     return (
-        <Card>
-            <S.Box>
-                <Title>ranking</Title>
-                {componentLoading ? (
-                    <Loader />
-                ) : (
-                    <S.UsersStatsWrapper>{usersStats}</S.UsersStatsWrapper>
-                )}
-                <Button onClick={() => redirectHandler('/')} margin="20px 0 0 0" width="190px">
-                    back to menu
-                </Button>
-            </S.Box>
-        </Card>
+            <Card>
+                <S.Box>
+                    <Title>ranking</Title>
+                    {componentLoading ? (
+                        <Loader />
+                    ) : (
+                        <S.UsersStatsWrapper>{usersStats}</S.UsersStatsWrapper>
+                    )}
+                    <Button onClick={() => redirectHandler('/')} margin="20px 0 0 0" width="190px">
+                        back to menu
+                    </Button>
+                </S.Box>
+            </Card>
     );
 };
 

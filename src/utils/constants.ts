@@ -14,3 +14,25 @@ export const device = {
 
 export const emialRegex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+export const pageVariants = {
+    in: {
+        opacity: 1,
+        x: 0,
+    },
+    out: {
+        opacity: 0,
+        x: '-100vw',
+    },
+};
+
+export const pageTransition = {
+    type: 'tween',
+    ease: 'circOut',
+    duration: 0.7,
+};
+export const pageProps = {
+    initial: 'out',
+    animate: 'in',
+    exit: 'out',
+};

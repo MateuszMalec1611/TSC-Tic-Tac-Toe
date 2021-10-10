@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useQuery } from 'src/hooks/useQueryParams';
 import { calculateWinner } from 'src/utils/helpers';
 import { clickHandler } from 'src/utils/helpers';
 import TicTacToe from 'src/components/TicTacToe/TicTacToe';
 import GameModal from 'src/components/GameModal/GameModal';
 import TurnNavigator from 'src/components/TurnNavigator/TurnNavigator';
+import { pageTransition, pageVariants, pageProps } from 'src/utils/constants';
 import * as S from './styles';
 
 const TicTacToe1vs1 = () => {
@@ -42,13 +44,15 @@ const TicTacToe1vs1 = () => {
     }, [movesLeft]);
 
     return (
-        <S.Container>
-            <TurnNavigator winner={winner} x0={x0} movesLeft={movesLeft} />
-            <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
-            {modalVisibility && (
-                <GameModal winner={winner} gameMode={gameMode} modalHandler={modalHandler} />
-            )}
-        </S.Container>
+        <motion.div {...pageProps} variants={pageVariants} transition={pageTransition}>
+            <S.Container>
+                <TurnNavigator winner={winner} x0={x0} movesLeft={movesLeft} />
+                <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
+                {modalVisibility && (
+                    <GameModal winner={winner} gameMode={gameMode} modalHandler={modalHandler} />
+                )}
+            </S.Container>
+        </motion.div>
     );
 };
 

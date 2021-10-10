@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useQuery } from 'src/hooks/useQueryParams';
 import { calculateWinner } from 'src/utils/helpers';
 import { clickHandler } from 'src/utils/helpers';
@@ -9,6 +10,7 @@ import TurnNavigator from 'src/components/TurnNavigator/TurnNavigator';
 import { setUserData } from 'src/store/TicTacToe/TicTacToe.services';
 import { TicTacToeActionType } from 'src/store/TicTacToe/TicTacToe.types';
 import { useTicTacToe } from 'src/hooks/useTicTacToe';
+import { pageProps, pageTransition, pageVariants } from 'src/utils/constants';
 import * as S from './styles';
 
 const TicTacToeVsAI = () => {
@@ -106,19 +108,21 @@ const TicTacToeVsAI = () => {
     }, [movesLeft]);
 
     return (
-        <S.Container>
-            <TurnNavigator winner={winner} x0={x0} movesLeft={movesLeft} />
-            <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
-            {modalVisibility && (
-                <GameModal winner={winner} gameMode={gameMode} modalHandler={modalHandler}>
-                    <S.DescriptionBox>
-                        <S.DescTitle>games played: {userData.gamesPlayed}</S.DescTitle>
-                        <S.Description>lost games: {userData.lostGames}</S.Description>
-                        <S.Description>won games: {userData.wonGames}</S.Description>
-                    </S.DescriptionBox>
-                </GameModal>
-            )}
-        </S.Container>
+        <motion.div {...pageProps} variants={pageVariants} transition={pageTransition}>
+            <S.Container>
+                <TurnNavigator winner={winner} x0={x0} movesLeft={movesLeft} />
+                <TicTacToe cells={cells} clickHandler={click} resetGameHandler={resetGameHandler} />
+                {modalVisibility && (
+                    <GameModal winner={winner} gameMode={gameMode} modalHandler={modalHandler}>
+                        <S.DescriptionBox>
+                            <S.DescTitle>games played: {userData.gamesPlayed}</S.DescTitle>
+                            <S.Description>lost games: {userData.lostGames}</S.Description>
+                            <S.Description>won games: {userData.wonGames}</S.Description>
+                        </S.DescriptionBox>
+                    </GameModal>
+                )}
+            </S.Container>
+        </motion.div>
     );
 };
 
