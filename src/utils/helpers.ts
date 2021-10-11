@@ -35,3 +35,13 @@ export const clickHandler = (
     cellsCopy[index] = x0;
     return cellsCopy;
 };
+
+export const shuffleFirstMove = () => {
+    const randomNumber = Math.floor(Math.random() * 2);
+
+    if (randomNumber === 0) {
+        return false;
+    } else {
+        return true;
+    }
+};

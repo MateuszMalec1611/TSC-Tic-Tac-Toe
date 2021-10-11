@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from 'src/hooks/useQueryParams';
-import { calculateWinner } from 'src/utils/helpers';
+import { calculateWinner, shuffleFirstMove } from 'src/utils/helpers';
 import { clickHandler } from 'src/utils/helpers';
 import { useAuth } from 'src/hooks/useAuth';
 import TicTacToe from 'src/components/TicTacToe/TicTacToe';
@@ -15,7 +15,7 @@ import * as S from './styles';
 
 const TicTacToeVsAI = () => {
     const [cells, setCells] = useState<string[]>(Array(9).fill(null));
-    const [xIsNext, setXIsNext] = useState(true);
+    const [xIsNext, setXIsNext] = useState(shuffleFirstMove());
     const [movesLeft, setMovesLeft] = useState(9);
     const [modalVisibility, setModalVisibility] = useState(false);
     const { currentUser } = useAuth();
@@ -59,7 +59,7 @@ const TicTacToeVsAI = () => {
 
     const resetGameHandler = () => {
         setCells(Array(9).fill(null));
-        setXIsNext(true);
+        setXIsNext(shuffleFirstMove());
         setMovesLeft(9);
     };
 
@@ -105,7 +105,7 @@ const TicTacToeVsAI = () => {
         const aiMoveTimeout = setTimeout(() => aiMove(), 500);
 
         return () => clearTimeout(aiMoveTimeout);
-    }, [movesLeft]);
+    }, [xIsNext]);
 
     return (
         <motion.div {...pageProps} variants={pageVariants} transition={pageTransition}>
