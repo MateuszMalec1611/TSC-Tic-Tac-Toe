@@ -21,7 +21,7 @@ export const UsersStatsWrapper = styled.ul`
     width: 100%;
     list-style: none;
     overflow-y: scroll;
-    animation: ${show} .5s ease-in;
+    animation: ${show} 0.5s ease-in;
 
     &::-webkit-scrollbar {
         height: 4px;
@@ -37,4 +37,9 @@ export const UsersStatsWrapper = styled.ul`
     @media ${device.tabletBreakpoint} {
         height: 300px;
     }
+`;
+
+export const InfoText = styled.p`
+    color: ${({ theme }) => theme.colors.redColor};
+    text-align: center;
 `;

@@ -16,6 +16,8 @@ const Ranking = () => {
         ticTacToeState: {
             loading: { componentLoading },
             usersData,
+            error,
+            errorMessage,
         },
     } = useTicTacToe();
     const history = useHistory();
@@ -27,10 +29,15 @@ const Ranking = () => {
                 payload: { componentLoading: true },
             });
             const data = await fetchUsersData();
+            if (data.length === 0)
+                throw new Error('The ranking is empty or the connection could not be established');
 
             ticTacToeDispatch({ type: TicTacToeActionType.GET_USERS_DATA, payload: data });
         } catch (err: any) {
-            alert(err.message + 'context');
+            ticTacToeDispatch({
+                type: TicTacToeActionType.ERROR,
+                payload: { error: true, errorMessage: err.message },
+            });
         } finally {
             ticTacToeDispatch({
                 type: TicTacToeActionType.LOADING,
@@ -55,19 +62,21 @@ const Ranking = () => {
     ));
 
     return (
-            <Card>
-                <S.Box>
-                    <Title>ranking</Title>
-                    {componentLoading ? (
-                        <Loader />
-                    ) : (
-                        <S.UsersStatsWrapper>{usersStats}</S.UsersStatsWrapper>
-                    )}
-                    <Button onClick={() => redirectHandler('/')} margin="20px 0 0 0" width="190px">
-                        back to menu
-                    </Button>
-                </S.Box>
-            </Card>
+        <Card>
+            <S.Box>
+                <Title>ranking</Title>
+                {componentLoading ? (
+                    <Loader />
+                ) : error ? (
+                    <S.InfoText>{errorMessage}</S.InfoText>
+                ) : (
+                    <S.UsersStatsWrapper>{usersStats}</S.UsersStatsWrapper>
+                )}
+                <Button onClick={() => redirectHandler('/')} margin="20px 0 0 0" width="190px">
+                    back to menu
+                </Button>
+            </S.Box>
+        </Card>
     );
 };
 
