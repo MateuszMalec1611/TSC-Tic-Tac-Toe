@@ -12,7 +12,9 @@ export const ErrorTitle = styled.p`
     color: ${({ theme }) => theme.colors.redColor};
 `;
 export const ErrorDesc = styled.pre`
+    padding: 0 10px;
     margin: 10px 0;
     font-size: ${({ theme }) => theme.fontSizes.M};
     white-space: pre-wrap;
+    word-wrap: break-word;
 `;
